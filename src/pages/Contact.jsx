@@ -3,25 +3,14 @@ import { motion, AnimatePresence } from 'motion/react'
 import Button from '../components/Button'
 
 const STEPS = [
-  {
-    id: 'reason',
-    question: 'What brings you to therapy?',
-    options: ['Anxiety', 'Depression', 'Relationship Issues', 'Trauma', 'Stress', 'Other'],
-  },
-  {
-    id: 'before',
-    question: 'Have you attended therapy before?',
-    options: ['Yes', 'No'],
-  },
-  {
-    id: 'type',
-    question: 'Preferred session type?',
-    options: ['Online', 'In-person'],
-  },
-  { id: 'name', question: 'Full Name', type: 'text', placeholder: 'Your full name' },
-  { id: 'email', question: 'Email', type: 'email', placeholder: 'you@example.com' },
-  { id: 'phone', question: 'Phone Number', type: 'tel', placeholder: '+1 (555) 000-0000' },
-  { id: 'time', question: 'Preferred Time', type: 'text', placeholder: 'e.g. Weekday mornings' },
+  { id: 'name', question: 'Full name', type: 'text', placeholder: 'Your full name' },
+  { id: 'age', question: 'Age', type: 'text', placeholder: 'e.g. 28' },
+  { id: 'phone', question: 'Phone number', type: 'tel', placeholder: 'e.g. +91 9876543210' },
+  { id: 'location', question: 'Location', type: 'text', placeholder: 'City / State' },
+  { id: 'profession', question: 'Profession', type: 'text', placeholder: 'Your profession' },
+  { id: 'concerns', question: 'Concerns to be addressed', type: 'text', placeholder: 'Briefly describe what you would like to work on' },
+  { id: 'referral', question: 'Referral name, if any', type: 'text', placeholder: 'Optional' },
+  { id: 'languages', question: 'Languages preferred', type: 'text', placeholder: 'e.g. English, Tamil, Hindi' },
 ]
 
 const contactInfo = {
@@ -47,6 +36,7 @@ export default function Contact() {
   const value = formData[current?.id] ?? ''
 
   const canNext = () => {
+    if (current.id === 'referral') return true
     if (current.type === 'text' || current.type === 'email' || current.type === 'tel') return value.trim().length > 0
     return true
   }
@@ -112,7 +102,7 @@ export default function Contact() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Begin Your Healing Journey
+          Book Now
         </motion.h1>
         <motion.p
           className="text-sm sm:text-base md:text-lg text-[#5a5a5a] max-w-xl mx-auto px-2"
@@ -120,7 +110,7 @@ export default function Contact() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          Answer a few questions so we can match you with the right support.
+          Share a few details so we can get in touch and schedule your session.
         </motion.p>
       </section>
 

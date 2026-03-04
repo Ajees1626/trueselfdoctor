@@ -1,17 +1,19 @@
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import Button from '../components/Button'
 import FAQAccordion from '../components/FAQAccordion'
 import ServicesSlider from '../components/ServicesSlider'
+import TherapistDetails from '../components/TherapistDetails'
 import AnimatedCounter from '../components/AnimatedCounter'
 import { testimonials } from '../data/testimonials'
 import { faqItems } from '../data/faq'
 
 const highlights = [
-  'Certified Psychotherapist',
-  '10+ Years Experience',
-  'Confidential Sessions',
-  'Online & Offline Therapy',
+  'This is a Space to Reflect',
+  '9+ Years Experience',
+  'A Space to Process',
+  'A Space to Return to Your True Self',
 ]
 
 const stats = [
@@ -21,7 +23,34 @@ const stats = [
   { value: 98, suffix: '%', label: 'Positive Feedback' },
 ]
 
+const aboutParagraphs = [
+  'Founded in 2023, Trueself is an online therapy platform built on the belief that meaningful healing requires both professional depth and human warmth. While we are a young platform, our work is grounded in years of clinical experience, ethical practice, and a growing community of clients who trust us with their stories.',
+  'We are a collective of qualified, women therapists committed to creating safe, thoughtful, and non-judgmental therapeutic spaces. Our platform serves individuals, couples, and families across different life stages and identities because emotional wellbeing is not limited by gender, age, or background.',
+  'At Trueself, therapy is not rushed, surface-level, or formulaic. We take a relational, insight-oriented, and evidence-based approach to help clients navigate anxiety, relationship challenges, life transitions, burnout, self-esteem struggles, trauma, and personal growth.',
+  'Being an online platform which takes up sessions in English, Tamil, Malayalam, Kannada, Hindi, Gujarati, it allows us to make therapy accessible, flexible, and consistent while maintaining the depth and quality of in-person therapeutic work.',
+  'In just three years, Trueself has grown into a trusted mental health space because of one simple principle: We honour every story with care, confidentiality, and integrity.',
+]
+
 export default function Home() {
+  const [aboutSlideIndex, setAboutSlideIndex] = useState(0)
+  const [testimonialSlideIndex, setTestimonialSlideIndex] = useState(0)
+
+  useEffect(() => {
+    const t = setInterval(() => {
+      setAboutSlideIndex((i) => (i + 1) % aboutParagraphs.length)
+    }, 15000)
+    return () => clearInterval(t)
+  }, [])
+
+  useEffect(() => {
+    const maxSlide = Math.max(0, testimonials.length - 3)
+    const slideCount = maxSlide + 1
+    const t = setInterval(() => {
+      setTestimonialSlideIndex((i) => (slideCount <= 1 ? 0 : (i + 1) % slideCount))
+    }, 6000)
+    return () => clearInterval(t)
+  }, [])
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -92,7 +121,7 @@ export default function Home() {
             >
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-[#C68532] rounded-full" />
-                10+ Years Experience
+                9+ Years Experience
               </div>
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 bg-[#C68532] rounded-full" />
@@ -173,7 +202,7 @@ export default function Home() {
       {/* Elegant frame */}
       <div className="absolute -top-2 -left-2 sm:-top-6 sm:-left-6 w-full h-full border border-[#C68532] rounded-xl sm:rounded-[2rem]" />
 
-      <div className="relative rounded-xl sm:rounded-[2rem] overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] w-full max-w-sm sm:max-w-md mx-auto md:mx-0">
+      <div className="relative rounded-xl sm:rounded-[2rem] overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] w-full max-w-sm sm:max-w-md mx-auto md:mx-0 aspect-[3/4] sm:aspect-[4/5] min-h-[320px] sm:min-h-[400px]">
         <img
           src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600"
           alt="Professional Psychotherapist"
@@ -184,7 +213,7 @@ export default function Home() {
       {/* Floating Experience Card */}
       <div className="absolute -bottom-4 -right-2 sm:-bottom-8 sm:-right-8 bg-white shadow-xl rounded-xl sm:rounded-2xl px-4 py-3 sm:px-6 sm:py-4 text-center">
         <p className="text-xl sm:text-2xl font-semibold text-[#C68532]">
-          <AnimatedCounter end={10} suffix="+" duration={1.2} />
+          <AnimatedCounter end={9} suffix="+" duration={1.2} />
         </p>
         <p className="text-sm text-gray-500">Years Experience</p>
       </div>
@@ -209,17 +238,36 @@ export default function Home() {
         </span>
       </motion.h2>
 
-      <motion.p
-        className="text-lg text-[#555] leading-relaxed mb-8"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.1 }}
-      >
-        We provide a confidential and non-judgmental environment where individuals,
-        couples, and families can explore their emotions safely. Our approach blends
-        evidence-based psychotherapy techniques with compassion and personalized care.
-      </motion.p>
+      {/* Paragraph slider - auto + manual dots */}
+      <div className="relative min-h-[180px] sm:min-h-[200px] mb-6">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={aboutSlideIndex}
+            className="text-lg text-[#555] leading-relaxed"
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -12 }}
+            transition={{ duration: 0.95 }}
+          >
+            {aboutParagraphs[aboutSlideIndex]}
+          </motion.p>
+        </AnimatePresence>
+        <div className="flex justify-center gap-2 mt-6">
+          {aboutParagraphs.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setAboutSlideIndex(i)}
+              className={`rounded-full transition-all duration-300 ${
+                i === aboutSlideIndex
+                  ? 'w-8 h-2.5 bg-[#C68532]'
+                  : 'w-2.5 h-2.5 bg-[#C68532]/40 hover:bg-[#C68532]/60'
+              }`}
+              aria-label={`Go to paragraph ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
 
       <div className="grid sm:grid-cols-2 gap-6">
         {highlights.map((text, i) => (
@@ -347,6 +395,31 @@ export default function Home() {
 
 </section>
 
+      {/* Therapist Details */}
+      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden" style={{ background: 'linear-gradient(180deg, #faf8f5 0%, #f5f0e8 100%)' }}>
+        <div className="absolute top-0 right-0 w-72 h-72 bg-[#EAD1A3] rounded-full blur-3xl opacity-30" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#EDE4D4] rounded-full blur-3xl opacity-40" />
+        <div className="relative max-w-7xl mx-auto">
+          <motion.div
+            className="text-center mb-12 sm:mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <span className="text-sm tracking-[0.25em] uppercase text-[#C68532] font-medium">
+              Our Team
+            </span>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[#1f2933] mt-4">
+              Therapist Details
+            </h2>
+            <p className="text-gray-600 mt-3 max-w-xl mx-auto text-sm sm:text-base">
+              Meet our qualified therapists dedicated to your wellbeing.
+            </p>
+          </motion.div>
+          <TherapistDetails />
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f6f7f5] overflow-hidden">
 
@@ -375,33 +448,77 @@ export default function Home() {
     </h2>
   </motion.div>
 
-  {/* Testimonial Grid */}
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
-    {testimonials.map((t, i) => (
-      <motion.div
-        key={t.id}
-        className="relative bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-[#EDE4D4] hover:shadow-[0_30px_70px_-15px_rgba(0,0,0,0.18)] transition duration-300"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: i * 0.1 }}
-      >
-        {/* Quote Icon */}
-        <div className="absolute -top-4 left-6 text-6xl text-[#F0E6D0] font-serif">
-          “
+  {/* Testimonial Slider - 3 columns, auto + manual */}
+  {(() => {
+    const maxSlide = Math.max(0, testimonials.length - 3)
+    const start = Math.min(testimonialSlideIndex, maxSlide)
+    const visible = [0, 1, 2].map((d) => testimonials[start + d]).filter(Boolean)
+    return (
+      <div className="relative max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          <AnimatePresence mode="wait">
+            {visible.map((t, idx) => (
+              <motion.div
+                key={`${testimonialSlideIndex}-${t.id}`}
+                className="relative bg-white rounded-xl sm:rounded-2xl p-5 sm:p-6 md:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] border border-[#EDE4D4] min-h-[200px] sm:min-h-[260px] flex flex-col"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3, delay: idx * 0.05 }}
+              >
+                <div className="absolute -top-4 left-6 text-6xl text-[#F0E6D0] font-serif">"</div>
+                <p className="text-gray-600 leading-relaxed mb-6 relative z-10 flex-1">
+                  {t.text}
+                </p>
+                <div className="w-10 h-[2px] bg-[#EAD1A3] mb-3" />
+                <p className="font-medium text-[#1f2933]">{t.name}</p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
 
-        <p className="text-gray-600 leading-relaxed mb-6 relative z-10">
-          {t.text}
-        </p>
+        <div className="flex items-center justify-center gap-4 mt-8">
+          <button
+            type="button"
+            onClick={() => setTestimonialSlideIndex((i) => (i <= 0 ? maxSlide : i - 1))}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border border-[#EDE4D4] shadow-sm flex items-center justify-center text-[#C68532] hover:bg-[#F0E6D0] transition-colors"
+            aria-label="Previous"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
 
-        <div className="mt-auto">
-          <div className="w-10 h-[2px] bg-[#EAD1A3] mb-3" />
-          <p className="font-medium text-[#1f2933]">{t.name}</p>
+          <div className="flex gap-2">
+            {Array.from({ length: maxSlide + 1 }, (_, i) => (
+              <button
+                key={i}
+                type="button"
+                onClick={() => setTestimonialSlideIndex(i)}
+                className={`rounded-full transition-all duration-300 ${
+                  i === testimonialSlideIndex
+                    ? 'w-8 h-2.5 bg-[#C68532]'
+                    : 'w-2.5 h-2.5 bg-[#C68532]/40 hover:bg-[#C68532]/60'
+                }`}
+                aria-label={`Slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setTestimonialSlideIndex((i) => (i >= maxSlide ? 0 : i + 1))}
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#C68532] text-white shadow-sm flex items-center justify-center hover:bg-[#B8762F] transition-colors"
+            aria-label="Next"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
         </div>
-      </motion.div>
-    ))}
-  </div>
+      </div>
+    )
+  })()}
 
 </div>
 </section>

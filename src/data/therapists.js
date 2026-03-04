@@ -1,0 +1,42 @@
+export const therapists = [
+  {
+    id: 1,
+    name: 'Parita Mehta',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    qualification: 'Msc. Counselling Psychology',
+    experience: '8 years',
+    specialisation: 'Relationship issues, stress, anxiety, low self esteem and confidence, body image, overthinking, dealing with emotions, etc',
+  },
+  {
+    id: 2,
+    name: 'Swathi Ashok',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    qualification: 'Msc. Clinical Psychology',
+    experience: '6+ years',
+    specialisation: 'Different types of anxiety, Relationship issues, Break up, Grief, healthy parenting, childhood trauma, anger management, body image issues, over thinking, etc',
+  },
+  {
+    id: 3,
+    name: 'Sisira Sreenivasan',
+    image: '/image/therapists/sisira.jpg',
+    qualification: 'Msc. Psychology',
+    experience: '5 years',
+    specialisation: 'Child behaviour management, Parenting Support, couple therapy, Relationship issues, Regulating emotions, Anxiety issues, Inner child healing, self doubts, low self esteem, Grief, etc',
+  },
+  {
+    id: 4,
+    name: 'Kirthiga Nagaraj',
+    image: '/image/therapists/kirthiga.jpg',
+    qualification: 'MSW - Medical & Psychiatry, Diploma in Organizational psychology & Child Psychology',
+    experience: '5+ Years',
+    specialisation: 'Marital & Premarital Counselling, Couples Counselling, Habit Formation, Behavioural Activation & Management, Addiction Management, Trauma & Inner child work, Somatic Therapy, Emotional Management, Self Management (Life Transitions), Psychosocial Rehabilitation, Academic Counselling & Crisis Counselling, etc',
+  },
+  {
+    id: 5,
+    name: 'Apoorva Shaji',
+    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    qualification: 'Msc. Counselling Psychology',
+    experience: '9+ years',
+    specialisation: 'Stress and anxiety, time management, relationship concerns, trauma, abuse, inner child concerns, self related concerns, grief, anger management concerns, etc',
+  },
+]
