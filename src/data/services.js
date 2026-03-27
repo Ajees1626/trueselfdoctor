@@ -3,7 +3,7 @@ export const services = [
     slug: 'individual-therapy',
     title: 'Individual Therapy (Adults)',
     shortSummary: 'One-on-one online sessions for emotional wellbeing and personal growth.',
-    image: 'https://images.unsplash.com/photo-1503454537195-1dcabb73ffb9?w=600&h=400&fit=crop',
+    image: '/image/no1.webp',
     description: 'Individual therapy at Trueself offers one-on-one online sessions tailored to your unique needs. Whether you are navigating anxiety, low mood, stress, or life transitions, our qualified therapists provide a safe, confidential space for emotional wellbeing and personal growth.',
     bullets: [
       'Anxiety & overthinking',
@@ -28,7 +28,7 @@ export const services = [
     slug: 'couples-therapy',
     title: 'Couples Therapy',
     shortSummary: 'Online relationship counselling focused on communication, trust, and connection.',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop',
+    image: '/image/no2.webp',
     description: 'Couples therapy at Trueself is designed to help partners rebuild connection, improve communication, and navigate relationship challenges. Our online sessions provide a neutral, supportive space for both individuals to be heard and to work toward a healthier relationship.',
     bullets: [
       'Communication breakdown',
@@ -52,7 +52,7 @@ export const services = [
     slug: 'family-therapy',
     title: 'Family Therapy',
     shortSummary: 'For families seeking healthier dynamics, better communication, and emotional understanding.',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop',
+    image: '/image/no3.webp',
     description: 'Family therapy at Trueself supports families in building healthier dynamics, improving communication, and fostering emotional understanding between members. Our therapists work with all members to create a more supportive and connected home environment.',
     bullets: [
       'Healthier family dynamics',
@@ -73,7 +73,7 @@ export const services = [
     slug: 'therapy-for-women',
     title: 'Therapy for Women',
     shortSummary: 'Dedicated support for women across motherhood, identity, work-life balance, and boundaries.',
-    image: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&h=400&fit=crop',
+    image: '/image/no4.webp',
     description: 'Although Trueself supports all genders, we offer dedicated therapy for women, drawing on our strong foundation in women-led care. We address themes such as motherhood transitions, postpartum emotional changes, midlife and identity shifts, work-life balance, and emotional labour and boundaries.',
     bullets: [
       'Motherhood transitions',
@@ -95,7 +95,7 @@ export const services = [
     slug: 'therapy-for-adolescents',
     title: 'Therapy for Adolescents & Young Adults',
     shortSummary: 'Support for academic stress, career confusion, identity, and emotional regulation.',
-    image: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=600&h=400&fit=crop',
+    image: '/image/no5.webp',
     description: 'Therapy for adolescents and young adults at Trueself addresses the unique challenges of this life stage. We support young people with academic stress, career confusion, peer pressure, identity formation, and emotional regulation skills in a safe, non-judgmental space.',
     bullets: [
       'Academic stress',
@@ -117,7 +117,7 @@ export const services = [
     slug: 'workshops-group',
     title: 'Workshops & Group Sessions',
     shortSummary: 'Thoughtfully designed reflective spaces combining psychological insight with shared experience.',
-    image: 'https://images.unsplash.com/photo-1516541195162-7f3b39f84b8f?w=600&h=400&fit=crop',
+    image: '/image/no6.webp',
     description: 'At Trueself, our workshops and group sessions are thoughtfully designed reflective spaces that combine psychological insight with shared experience. These sessions focus on themes such as emotional resilience, self-care, relationship patterns, stress management, and life transitions.',
     bullets: [
       'Emotional resilience',
@@ -135,27 +135,7 @@ export const services = [
     ],
     icon: '👥',
   },
-  {
-    slug: 'corporate-wellness',
-    title: 'Corporate Wellness',
-    shortSummary: 'Workplace wellbeing programmes tailored to your organisation, delivered online by qualified therapists.',
-    image: 'https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=600&h=400&fit=crop',
-    description: 'At Trueself, we understand that workplace wellbeing goes beyond productivity — it is about creating emotionally sustainable environments where individuals feel supported, heard, and equipped to navigate professional challenges. All corporate sessions are tailored to the organisation\'s needs and delivered online by qualified therapists.',
-    bullets: [
-      'Tailored to your organisation\'s needs',
-      'Delivered online by qualified therapists',
-      'Emotionally sustainable work environments',
-      'Support for stress, burnout, and professional challenges',
-      'Scalable workshops and one-to-one support',
-    ],
-    benefits: [
-      'Improved employee wellbeing and retention',
-      'Practical skills for stress and resilience',
-      'A culture that values mental health',
-      'Flexible, online delivery for distributed teams',
-    ],
-    icon: '💼',
-  },
+ 
 ]
 
 export const getServiceBySlug = (slug) => services.find((s) => s.slug === slug)

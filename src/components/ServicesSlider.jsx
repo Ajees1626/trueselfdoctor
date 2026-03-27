@@ -69,10 +69,21 @@ export default function ServicesSlider() {
   
             {/* RIGHT VISUAL AREA */}
             <div className="hidden md:flex justify-center">
-              <div className="w-72 h-72 rounded-full bg-[#f2f7f5] flex items-center justify-center">
-                <div className="text-7xl text-[#c7ddd6]">
-                  {item.icon}
-                </div>
+              <div className="w-72 h-72 rounded-[2rem] overflow-hidden border border-[#EDE4D4] bg-[#f8f6f2] shadow-[0_20px_45px_-20px_rgba(198,133,50,0.25)]">
+                {item.image ? (
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover object-center"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="text-7xl text-[#C68532]/40">
+                      {item.icon}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
   
