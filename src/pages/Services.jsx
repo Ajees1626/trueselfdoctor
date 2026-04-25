@@ -40,8 +40,11 @@ export default function Services() {
         <div className="max-w-6xl mx-auto">
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
-            {services.map((service, i) => (
-              <motion.article
+            {services.map((service, i) => {
+              const ServiceIcon = service.icon
+
+              return (
+                <motion.article
                 key={service.slug}
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -69,8 +72,8 @@ export default function Services() {
 
                     {/* Content */}
                     <div className="p-5 sm:p-6 md:p-8">
-                      <span className="text-2xl sm:text-3xl mb-3 sm:mb-4 block opacity-80">
-                        {service.icon}
+                      <span className="mb-3 sm:mb-4 block opacity-80 text-[#C68532]">
+                        <ServiceIcon className="text-2xl sm:text-3xl" aria-hidden="true" />
                       </span>
 
                       <h3 className="text-xl sm:text-2xl font-semibold text-[#3d3528] mb-2 sm:mb-3 tracking-tight">
@@ -89,7 +92,8 @@ export default function Services() {
                   </div>
                 </Link>
               </motion.article>
-            ))}
+              )
+            })}
           </div>
 
         </div>

@@ -29,6 +29,7 @@ export default function ServicesSlider() {
   }
 
   const item = services[index]
+  const ServiceIcon = item.icon
 
   return (
     <div className="relative max-w-5xl mx-auto">
@@ -46,8 +47,8 @@ export default function ServicesSlider() {
   
             {/* LEFT CONTENT */}
             <div>
-              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-[#EAD1A3] text-[#C68532] text-2xl sm:text-3xl mb-4 sm:mb-6 shadow-sm">
-                {item.icon}
+              <div className="inline-flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-xl sm:rounded-2xl bg-[#EAD1A3] text-[#C68532] mb-4 sm:mb-6 shadow-sm">
+                <ServiceIcon className="text-xl sm:text-2xl md:text-3xl" aria-hidden="true" />
               </div>
   
               <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#1f2933] mb-3 sm:mb-4">
@@ -79,9 +80,7 @@ export default function ServicesSlider() {
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">
-                    <div className="text-7xl text-[#C68532]/40">
-                      {item.icon}
-                    </div>
+                    <ServiceIcon className="text-7xl text-[#C68532]/40" aria-hidden="true" />
                   </div>
                 )}
               </div>

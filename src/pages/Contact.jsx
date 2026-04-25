@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import Button from '../components/Button'
+import ContactWellnessPoll from '../components/ContactWellnessPoll'
 
 const STEPS = [
   { id: 'name', question: 'Full name', type: 'text', placeholder: 'Your full name' },
@@ -15,7 +16,7 @@ const STEPS = [
 
 const contactInfo = {
   phone: '+91 8778964644',
-  email: 'contact@mindfultherapy.example',
+  email: 'trueselfcounsellingservices@gmail.com',
   address: '123 Peaceful Lane, Suite 100, Calm City, CC 12345',
   hours: 'Mon–Fri 9:00 AM – 6:00 PM, Sat 10:00 AM – 2:00 PM',
 }
@@ -207,6 +208,7 @@ function ContactDetailsSection() {
   return (
     <section className="py-10 sm:py-14 md:py-16 px-4 sm:px-6 bg-[var(--color-sand)]">
       <div className="max-w-6xl mx-auto">
+        <ContactWellnessPoll />
         <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-sage-dark)] mb-6 sm:mb-8 text-center">
           Contact Details
         </h2>

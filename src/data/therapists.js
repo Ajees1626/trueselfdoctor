@@ -10,7 +10,7 @@ export const therapists = [
   {
     id: 2,
     name: 'Swathi Ashok',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099675/2026-04-15_11-40-01_page-0001_result_kuihen.webp',
     qualification: 'Msc. Clinical Psychology',
     experience: '6+ years',
     specialisation: 'Different types of anxiety, Relationship issues, Break up, Grief, healthy parenting, childhood trauma, anger management, body image issues, over thinking, etc',
@@ -18,7 +18,7 @@ export const therapists = [
   {
     id: 3,
     name: 'Sisira Sreenivasan',
-    image: '/image/therapists/sisira.jpg',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099674/IMG_6658.JPG_result_w4bsk9.webp',
     qualification: 'Msc. Psychology',
     experience: '5 years',
     specialisation: 'Child behaviour management, Parenting Support, couple therapy, Relationship issues, Regulating emotions, Anxiety issues, Inner child healing, self doubts, low self esteem, Grief, etc',
@@ -26,7 +26,7 @@ export const therapists = [
   {
     id: 4,
     name: 'Kirthiga Nagaraj',
-    image: '/image/therapists/kirthiga.jpg',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099674/IMG_3867.JPG_result_wecw8j.webp',
     qualification: 'MSW - Medical & Psychiatry, Diploma in Organizational psychology & Child Psychology',
     experience: '5+ Years',
     specialisation: 'Marital & Premarital Counselling, Couples Counselling, Habit Formation, Behavioural Activation & Management, Addiction Management, Trauma & Inner child work, Somatic Therapy, Emotional Management, Self Management (Life Transitions), Psychosocial Rehabilitation, Academic Counselling & Crisis Counselling, etc',

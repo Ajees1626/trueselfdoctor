@@ -7,7 +7,7 @@ import Button from '../components/Button'
 const contactDetails = {
   phone: '+91 8778964644',
   whatsappNumber: '918778964644', // digits only for wa.me
-  email: 'contact@mindfultherapy.example',
+  email: 'trueselfcounsellingservices@gmail.com',
   address: '123 Peaceful Lane, Suite 100, Calm City, CC 12345',
 }
 

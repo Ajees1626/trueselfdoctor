@@ -17,9 +17,9 @@ const highlights = [
 ]
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Clients Helped' },
-  { value: 10, suffix: '+', label: 'Years Experience' },
-  { value: 1200, suffix: '+', label: 'Sessions Conducted' },
+  { value: 700, suffix: '+', label: 'Clients Helped' },
+  { value: 9, suffix: '+', label: 'Years Experience' },
+  { value: 7000, suffix: '+', label: 'Sessions Conducted' },
   { value: 98, suffix: '%', label: 'Positive Feedback' },
 ]
 
@@ -567,7 +567,7 @@ export default function Home() {
       href="/contact"
       className="inline-block px-8 py-3 rounded-full bg-[#C68532] text-white font-medium shadow-md hover:bg-[#B8762F] transition duration-300"
     >
-      Contact the Clinic
+      Contact  
     </a>
   </div>
 

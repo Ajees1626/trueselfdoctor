@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { therapists } from '../data/therapists'
 
+// cspell:ignore specialisation
 const AUTOPLAY_MS = 7000
 
 function getInitials(name) {
@@ -52,7 +53,7 @@ export default function TherapistDetails() {
             <div className="grid grid-cols-1 md:grid-cols-2">
 
               {/* Image Section */}
-              <div className="relative h-[320px] md:h-full overflow-hidden">
+              <div className="relative h-[360px] sm:h-[440px] md:h-full md:min-h-[430px] overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#C68532] to-[#E6B566] flex items-center justify-center">
                   <span className="text-6xl md:text-7xl font-bold text-white/90 tracking-tight">
                     {getInitials(therapist.name)}
@@ -63,7 +64,7 @@ export default function TherapistDetails() {
                   <img
                     src={therapist.image}
                     alt={therapist.name}
-                    className="absolute inset-0 w-full h-full object-cover transition duration-700 hover:scale-105"
+                    className="absolute inset-0 w-full h-full object-cover object-top md:object-[center_20%] transition duration-700 hover:scale-105"
                     loading="lazy"
                     onError={(e) => (e.target.style.display = 'none')}
                   />
@@ -74,33 +75,31 @@ export default function TherapistDetails() {
               </div>
 
               {/* Details Section */}
-              <div className="flex flex-col justify-center p-8 md:p-12 bg-gradient-to-br from-white to-[#faf7f1]">
-                <div className="border-l-4 border-[#C68532] pl-6">
+              <div className="flex flex-col justify-center p-6 sm:p-8 md:p-12 bg-gradient-to-br from-white to-[#faf7f1]">
+                <div className="border-l-4 border-[#C68532] pl-4 sm:pl-6">
 
-                  <h3 className="text-2xl md:text-3xl font-semibold text-gray-800 tracking-tight mb-2">
+                  <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 tracking-tight mb-2">
                     {therapist.name}
                   </h3>
 
-                  <p className="text-sm uppercase tracking-widest text-[#C68532] font-medium mb-6">
+                  <p className="text-xs sm:text-sm uppercase tracking-widest text-[#C68532] font-medium mb-5 sm:mb-6">
                     {therapist.qualification}
                   </p>
 
-                  <div className="space-y-5 text-gray-600">
+                  <div className="space-y-4 sm:space-y-5 text-gray-600">
 
                     <div>
                       <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">
                         Experience
                       </p>
-                      <p className="text-lg font-medium text-gray-800">
+                      <p className="text-base sm:text-lg font-medium text-gray-800">
                         {therapist.experience}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">
-                        Specialisation
-                      </p>
-                      <p className="leading-relaxed">
+                      <p className="text-xs uppercase tracking-wider text-gray-500 mb-1">Specialization</p>
+                      <p className="text-sm sm:text-base leading-relaxed">
                         {therapist.specialisation}
                       </p>
                     </div>
@@ -114,10 +113,10 @@ export default function TherapistDetails() {
         </AnimatePresence>
 
         {/* Controls */}
-        <div className="flex items-center justify-between mt-10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mt-8 sm:mt-10">
 
           {/* Dots */}
-          <div className="flex gap-3">
+          <div className="flex gap-3 justify-center sm:justify-start w-full sm:w-auto order-2 sm:order-1">
             {therapists.map((_, i) => (
               <button
                 key={i}
@@ -135,10 +134,10 @@ export default function TherapistDetails() {
           </div>
 
           {/* Arrows */}
-          <div className="flex gap-4">
+          <div className="flex gap-3 sm:gap-4 justify-center sm:justify-end w-full sm:w-auto order-1 sm:order-2">
             <button
               onClick={goPrev}
-              className="w-12 h-12 rounded-full border border-[#E8DCC6] bg-white shadow-md hover:bg-[#f5efe5] transition flex items-center justify-center"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#E8DCC6] bg-white shadow-md hover:bg-[#f5efe5] transition flex items-center justify-center"
             >
               <svg className="w-5 h-5 text-[#C68532]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -147,7 +146,7 @@ export default function TherapistDetails() {
 
             <button
               onClick={goNext}
-              className="w-12 h-12 rounded-full bg-[#C68532] text-white shadow-md hover:bg-[#B8762F] transition flex items-center justify-center"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#C68532] text-white shadow-md hover:bg-[#B8762F] transition flex items-center justify-center"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

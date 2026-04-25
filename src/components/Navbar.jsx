@@ -45,12 +45,12 @@ export default function Navbar() {
           aria-label="Go to homepage - Mindful Therapy"
         >
           <img
-            src="/image/logo1.png"
+            src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777101455/logo1_result_v2bola.webp"
             alt=""
             className={`h-8 sm:h-9 md:h-10 w-auto object-contain transition-opacity duration-300 ${scrolled ? 'hidden' : 'block'}`}
           />
           <img
-            src="/image/logo1.png"
+            src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777101455/logo1_result_v2bola.webp"
             alt=""
             className={`h-8 sm:h-9 md:h-10 w-auto object-contain transition-opacity duration-300 ${scrolled ? 'block' : 'hidden'}`}
           />

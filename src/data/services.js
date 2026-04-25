@@ -1,9 +1,11 @@
+import { FaHeart, FaHome, FaLeaf, FaRainbow, FaUser, FaUsers } from 'react-icons/fa'
+
 export const services = [
   {
     slug: 'individual-therapy',
     title: 'Individual Therapy (Adults)',
     shortSummary: 'One-on-one online sessions for emotional wellbeing and personal growth.',
-    image: '/image/no1.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099662/Individual_Therapy_Adults__result_uhehlu.webp',
     description: 'Individual therapy at Trueself offers one-on-one online sessions tailored to your unique needs. Whether you are navigating anxiety, low mood, stress, or life transitions, our qualified therapists provide a safe, confidential space for emotional wellbeing and personal growth.',
     bullets: [
       'Anxiety & overthinking',
@@ -22,13 +24,13 @@ export const services = [
       'Flexible online sessions that fit your life',
       'Stronger emotional resilience and self-understanding',
     ],
-    icon: '🧘',
+    icon: FaUser,
   },
   {
     slug: 'couples-therapy',
     title: 'Couples Therapy',
     shortSummary: 'Online relationship counselling focused on communication, trust, and connection.',
-    image: '/image/no2.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099662/Couples_Therapy_result_hc41mp.webp',
     description: 'Couples therapy at Trueself is designed to help partners rebuild connection, improve communication, and navigate relationship challenges. Our online sessions provide a neutral, supportive space for both individuals to be heard and to work toward a healthier relationship.',
     bullets: [
       'Communication breakdown',
@@ -46,13 +48,13 @@ export const services = [
       'A safe space to address trust and repair',
       'Renewed commitment and shared goals',
     ],
-    icon: '💑',
+    icon: FaHeart,
   },
   {
     slug: 'family-therapy',
     title: 'Family Therapy',
     shortSummary: 'For families seeking healthier dynamics, better communication, and emotional understanding.',
-    image: '/image/no3.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099662/Family_Therapy_result_qbnwsg.webp',
     description: 'Family therapy at Trueself supports families in building healthier dynamics, improving communication, and fostering emotional understanding between members. Our therapists work with all members to create a more supportive and connected home environment.',
     bullets: [
       'Healthier family dynamics',
@@ -67,13 +69,13 @@ export const services = [
       'A shared language for emotions and needs',
       'Support during transitions and crises',
     ],
-    icon: '🏠',
+    icon: FaHome,
   },
   {
     slug: 'therapy-for-women',
     title: 'Therapy for Women',
     shortSummary: 'Dedicated support for women across motherhood, identity, work-life balance, and boundaries.',
-    image: '/image/no4.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099661/Therapy_for_Women_result_a9kaxp.webp',
     description: 'Although Trueself supports all genders, we offer dedicated therapy for women, drawing on our strong foundation in women-led care. We address themes such as motherhood transitions, postpartum emotional changes, midlife and identity shifts, work-life balance, and emotional labour and boundaries.',
     bullets: [
       'Motherhood transitions',
@@ -89,13 +91,13 @@ export const services = [
       'Tools for boundaries and emotional wellbeing',
       'Validation and clarity in your choices',
     ],
-    icon: '🌸',
+    icon: FaLeaf,
   },
   {
     slug: 'therapy-for-adolescents',
     title: 'Therapy for Adolescents & Young Adults',
     shortSummary: 'Support for academic stress, career confusion, identity, and emotional regulation.',
-    image: '/image/no5.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099662/Therapy_for_Adolescents_Young_Adults_result_a7iczl.webp',
     description: 'Therapy for adolescents and young adults at Trueself addresses the unique challenges of this life stage. We support young people with academic stress, career confusion, peer pressure, identity formation, and emotional regulation skills in a safe, non-judgmental space.',
     bullets: [
       'Academic stress',
@@ -111,13 +113,13 @@ export const services = [
       'Stronger emotional regulation',
       'A confidential space to be heard',
     ],
-    icon: '🌈',
+    icon: FaRainbow,
   },
   {
     slug: 'workshops-group',
     title: 'Workshops & Group Sessions',
     shortSummary: 'Thoughtfully designed reflective spaces combining psychological insight with shared experience.',
-    image: '/image/no6.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099662/Workshops_Group_Sessions_result_eizedu.webp',
     description: 'At Trueself, our workshops and group sessions are thoughtfully designed reflective spaces that combine psychological insight with shared experience. These sessions focus on themes such as emotional resilience, self-care, relationship patterns, stress management, and life transitions.',
     bullets: [
       'Emotional resilience',
@@ -133,7 +135,7 @@ export const services = [
       'Community and reduced isolation',
       'Ongoing support through themed programmes',
     ],
-    icon: '👥',
+    icon: FaUsers,
   },
  
 ]
