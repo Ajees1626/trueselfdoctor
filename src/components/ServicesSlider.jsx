@@ -41,7 +41,7 @@ export default function ServicesSlider() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: -direction * 80 }}
           transition={{ duration: 0.5 }}
-          className="relative overflow-hidden rounded-xl sm:rounded-[2rem] bg-[#ffffff] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.15)] border border-[#edf1ef]"
+          className="relative overflow-hidden rounded-xl sm:rounded-4xl bg-[#ffffff] shadow-[0_30px_70px_-20px_rgba(0,0,0,0.15)] border border-[#edf1ef]"
         >
           <div className="grid md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 p-5 sm:p-6 md:p-8 lg:p-12 items-center">
   
@@ -70,7 +70,7 @@ export default function ServicesSlider() {
   
             {/* RIGHT VISUAL AREA */}
             <div className="hidden md:flex justify-center">
-              <div className="w-72 h-72 rounded-[2rem] overflow-hidden border border-[#EDE4D4] bg-[#f8f6f2] shadow-[0_20px_45px_-20px_rgba(198,133,50,0.25)]">
+              <div className="w-72 h-72 rounded-4xl overflow-hidden border border-[#EDE4D4] bg-[#f8f6f2] shadow-[0_20px_45px_-20px_rgba(198,133,50,0.25)]">
                 {item.image ? (
                   <img
                     src={item.image}

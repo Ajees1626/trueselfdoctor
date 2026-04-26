@@ -34,7 +34,7 @@ export const therapists = [
   {
     id: 5,
     name: 'Apoorva Shaji',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp',
     qualification: 'Msc. Counselling Psychology',
     experience: '9+ years',
     specialisation: 'Stress and anxiety, time management, relationship concerns, trauma, abuse, inner child concerns, self related concerns, grief, anger management concerns, etc',

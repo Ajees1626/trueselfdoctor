@@ -22,9 +22,12 @@ const contactInfo = {
 }
 
 export default function Contact() {
+  const WEB3FORMS_ACCESS_KEY = 'c8aea697-74f4-4ec4-97fd-350e2fcf4704'
   const [step, setStep] = useState(0)
   const [formData, setFormData] = useState({})
   const [submitted, setSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const current = STEPS[step]
   const isLast = step === STEPS.length - 1
@@ -44,7 +47,7 @@ export default function Contact() {
 
   const handleNext = () => {
     if (isLast) {
-      setSubmitted(true)
+      void submitForm()
       return
     }
     setStep((s) => s + 1)
@@ -53,6 +56,44 @@ export default function Contact() {
   const handleBack = () => {
     if (isFirst) return
     setStep((s) => s - 1)
+  }
+
+  const submitForm = async () => {
+    try {
+      setIsSubmitting(true)
+      setSubmitError('')
+
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: 'New Contact Form Submission - True Self Counselling',
+        from_name: formData.name || 'Website Visitor',
+        name: formData.name || '',
+        age: formData.age || '',
+        phone: formData.phone || '',
+        location: formData.location || '',
+        profession: formData.profession || '',
+        concerns: formData.concerns || '',
+        referral: formData.referral || '',
+        languages: formData.languages || '',
+      }
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const result = await res.json()
+      if (result.success) {
+        setSubmitted(true)
+      } else {
+        setSubmitError('Unable to send right now. Please try again.')
+      }
+    } catch {
+      setSubmitError('Network issue. Please try again in a moment.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   if (submitted) {
@@ -178,10 +219,11 @@ export default function Contact() {
                         Back
                       </Button>
                     )}
-                    <Button onClick={handleNext} className="flex-1" disabled={!canNext()}>
-                      {isLast ? 'Submit' : 'Next'}
+                    <Button onClick={handleNext} className="flex-1" disabled={!canNext() || isSubmitting}>
+                      {isLast ? (isSubmitting ? 'Sending...' : 'Submit') : 'Next'}
                     </Button>
                   </div>
+                  {submitError && <p className="text-sm text-red-600">{submitError}</p>}
                 </div>
               )}
 

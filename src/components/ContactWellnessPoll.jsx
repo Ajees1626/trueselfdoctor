@@ -73,11 +73,14 @@ function countsToDisplay(counts) {
 }
 
 export default function ContactWellnessPoll() {
+  const WEB3FORMS_ACCESS_KEY = '7daba079-7de1-40c9-a4c6-3542b7d13d3e'
   const [active, setActive] = useState(0)
   const [pollState, setPollState] = useState(() => ({
     selection: {},
     countsByQ: Object.fromEntries(POLL.map((q) => [q.id, [...q.baseCounts]])),
   }))
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState('')
 
   const current = POLL[active]
   const { selection, countsByQ } = pollState
@@ -86,6 +89,8 @@ export default function ContactWellnessPoll() {
     [countsByQ, current.id]
   )
   const selected = selection[current.id]
+  const isLastQuestion = active === POLL.length - 1
+  const hasSelectedCurrent = selected !== undefined
 
   const vote = (optionIndex) => {
     setPollState((prev) => {
@@ -102,6 +107,45 @@ export default function ContactWellnessPoll() {
         countsByQ: { ...prev.countsByQ, [current.id]: row },
       }
     })
+  }
+
+  const submitPoll = async () => {
+    const answered = POLL.filter((q) => selection[q.id] !== undefined)
+    const responses = answered.map((q, idx) => {
+      const pickedIndex = selection[q.id]
+      const pickedOption = q.options[pickedIndex]
+      return `${idx + 1}. ${q.question} - ${pickedOption}`
+    })
+
+    try {
+      setIsSubmitting(true)
+      setSubmitStatus('')
+
+      const payload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: 'Wellness Poll Response - True Self Counselling',
+        from_name: 'Website Wellness Poll',
+        answered_count: String(answered.length),
+        responses: responses.join('\n'),
+      }
+
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+
+      const result = await res.json()
+      if (result.success) {
+        setSubmitStatus('Poll submitted successfully.')
+      } else {
+        setSubmitStatus('Submission failed. Please try again.')
+      }
+    } catch {
+      setSubmitStatus('Network issue. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -203,15 +247,31 @@ export default function ContactWellnessPoll() {
           >
             Previous
           </button>
-          <button
-            type="button"
-            onClick={() => setActive((a) => Math.min(POLL.length - 1, a + 1))}
-            disabled={active === POLL.length - 1}
-            className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] disabled:opacity-40 disabled:cursor-not-allowed hover:bg-[var(--color-mint)]"
-          >
-            Next
-          </button>
+          {isLastQuestion ? (
+            <button
+              type="button"
+              onClick={() => void submitPoll()}
+              disabled={isSubmitting || !hasSelectedCurrent}
+              className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)]"
+            >
+              {isSubmitting ? 'Submitting...' : 'Submit Poll'}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setActive((a) => Math.min(POLL.length - 1, a + 1))}
+              disabled={!hasSelectedCurrent}
+              className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)] disabled:opacity-40 disabled:cursor-not-allowed"
+            >
+              Next
+            </button>
+          )}
         </div>
+        {submitStatus && (
+          <p className={`mt-3 text-sm ${submitStatus.includes('successfully') ? 'text-green-700' : 'text-red-600'}`}>
+            {submitStatus}
+          </p>
+        )}
       </div>
     </div>
   )

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'motion/react'
 import { getServiceBySlug } from '../data/services'
 import Button from '../components/Button'
 
+// cspell:ignore whatsapp
 const contactDetails = {
   phone: '+91 8778964644',
   whatsappNumber: '918778964644', // digits only for wa.me
@@ -48,7 +49,7 @@ export default function ServiceDetail() {
   if (!service) {
     return (
       <div className="min-h-screen pt-28 px-4 py-16 text-center">
-        <h1 className="text-2xl font-bold text-[var(--color-sage-dark)]">Service not found</h1>
+        <h1 className="text-2xl font-bold text-(--color-sage-dark)">Service not found</h1>
         <Button to="/services" className="mt-4">
           Back to Services
         </Button>

@@ -174,7 +174,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.4 }}
             >
               <img
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=700"
+                src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp"
                 alt="Professional psychotherapist"
                 className="w-full h-full object-cover"
               />
@@ -204,7 +204,7 @@ export default function Home() {
 
       <div className="relative rounded-xl sm:rounded-[2rem] overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] w-full max-w-sm sm:max-w-md mx-auto md:mx-0 aspect-[3/4] sm:aspect-[4/5] min-h-[320px] sm:min-h-[400px]">
         <img
-          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600"
+          src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp"
           alt="Professional Psychotherapist"
           className="w-full h-full object-cover"
         />
