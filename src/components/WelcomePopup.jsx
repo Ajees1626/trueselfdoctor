@@ -1,3 +1,4 @@
+// cspell:ignore TRUESELF COUNSELLING
 import { motion, AnimatePresence } from 'motion/react'
 
 const DEFAULT_POSTER = 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1778217484/IMG_6184.JPG_result_ynqdcd.webp'
@@ -48,7 +49,7 @@ export default function WelcomePopup({ visible, onClose, poster = DEFAULT_POSTER
                 </div>
                 <div className="p-5 sm:p-6">
                   <h2 id="welcome-popup-title" className="text-lg font-semibold text-[#3d3d3d] mb-2">
-                    Welcome to Mindful Therapy
+                    WELCOME TO TRUESELF COUNSELLING
                   </h2>
                   <p className="text-sm text-[#5a5a5a] leading-relaxed">
                     {summary}

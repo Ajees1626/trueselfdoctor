@@ -45,7 +45,7 @@ export default function Footer() {
             <h2 className="text-base sm:text-lg font-semibold text-white mb-3 sm:mb-4 flex items-center gap-2.5">
               <img
                 src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777101448/logo2_result_c4ejrh.webp"
-                alt="trueself logo"
+                alt="TRUESELF COUNSELLING logo"
                 className="h-8 sm:h-9 w-auto object-contain"
                 loading="lazy"
               />

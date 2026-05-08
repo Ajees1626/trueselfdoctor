@@ -1,3 +1,4 @@
+// cspell:ignore TRUESELF COUNSELLING
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
@@ -42,7 +43,7 @@ export default function Navbar() {
         <Link
           to="/"
           className="flex items-center gap-2 shrink-0 transition-opacity hover:opacity-90"
-          aria-label="Go to homepage - Mindful Therapy"
+          aria-label="Go to homepage - TRUESELF COUNSELLING"
         >
           <img
             src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777101455/logo1_result_v2bola.webp"

@@ -16,7 +16,7 @@ const homeJsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'MedicalBusiness',
-    name: 'Trueself Counselling',
+    name: 'TRUESELF COUNSELLING',
     url: 'https://trueselfcounselling.com/',
     image:
       'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp',
@@ -67,11 +67,11 @@ const stats = [
 ]
 
 const aboutParagraphs = [
-  'Founded in 2023, Trueself is an online therapy platform built on the belief that meaningful healing requires both professional depth and human warmth. While we are a young platform, our work is grounded in years of clinical experience, ethical practice, and a growing community of clients who trust us with their stories.',
+  'Founded in 2023, TRUESELF COUNSELLING is an online therapy platform built on the belief that meaningful healing requires both professional depth and human warmth. While we are a young platform, our work is grounded in years of clinical experience, ethical practice, and a growing community of clients who trust us with their stories.',
   'We are a collective of qualified, women therapists committed to creating safe, thoughtful, and non-judgmental therapeutic spaces. Our platform serves individuals, couples, and families across different life stages and identities because emotional wellbeing is not limited by gender, age, or background.',
-  'At Trueself, therapy is not rushed, surface-level, or formulaic. We take a relational, insight-oriented, and evidence-based approach to help clients navigate anxiety, relationship challenges, life transitions, burnout, self-esteem struggles, trauma, and personal growth.',
+  'At TRUESELF COUNSELLING, therapy is not rushed, surface-level, or formulaic. We take a relational, insight-oriented, and evidence-based approach to help clients navigate anxiety, relationship challenges, life transitions, burnout, self-esteem struggles, trauma, and personal growth.',
   'Being an online platform which takes up sessions in English, Tamil, Malayalam, Kannada, Hindi, Gujarati, it allows us to make therapy accessible, flexible, and consistent while maintaining the depth and quality of in-person therapeutic work.',
-  'In just three years, Trueself has grown into a trusted mental health space because of one simple principle: We honour every story with care, confidentiality, and integrity.',
+  'In just three years, TRUESELF COUNSELLING has grown into a trusted mental health space because of one simple principle: We honour every story with care, confidentiality, and integrity.',
 ]
 
 export default function Home() {
@@ -98,15 +98,15 @@ export default function Home() {
     <div className="min-h-screen">
       {/* cspell:ignore logotop */}
       <Helmet>
-        <title>Trueself Counselling | Online Psychotherapy & Mental Health Services in India</title>
+        <title>TRUESELF COUNSELLING | Online Psychotherapy & Mental Health Services in India</title>
         <link rel="icon" href="/logotop.webp" />
         <link rel="shortcut icon" href="/logotop.webp" />
         <link rel="apple-touch-icon" href="/logotop.webp" />
       </Helmet>
       <SEO
-        title="Trueself Counselling | Online Psychotherapy & Mental Health Services in India"
+        title="TRUESELF COUNSELLING | Online Psychotherapy & Mental Health Services in India"
         description="Confidential online psychotherapy by qualified women therapists. Book sessions for anxiety, depression, couples, family and trauma therapy in English, Tamil, Malayalam, Kannada, Hindi & Gujarati."
-        keywords="online therapy India, psychotherapy, anxiety counselling, depression therapy, couples therapy, family therapy, women therapists, mental health, online counsellor, therapy in Tamil, therapy in Hindi, Trueself Counselling"
+        keywords="online therapy India, psychotherapy, anxiety counselling, depression therapy, couples therapy, family therapy, women therapists, mental health, online counsellor, therapy in Tamil, therapy in Hindi, TRUESELF COUNSELLING"
         path="/"
         jsonLd={homeJsonLd}
       />
@@ -211,31 +211,110 @@ export default function Home() {
             </motion.div>
           </div>
 
-          {/* RIGHT IMAGE */}
+          {/* RIGHT HERO ICON (3D) */}
           <motion.div
-            className="relative flex justify-center"
+            className="relative flex justify-center md:justify-end"
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <motion.div
-              className="absolute -top-6 -right-6 w-full h-full rounded-[2rem] border border-white/50 backdrop-blur-md"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-            />
-            <motion.div
-              className="relative rounded-xl sm:rounded-[2rem] overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.2)] w-full max-w-sm sm:max-w-md mx-auto md:mx-0"
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <img
-                src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp"
-                alt="Professional psychotherapist"
-                className="w-full h-full object-cover"
+            <div className="relative w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl min-h-[320px] sm:min-h-[420px] md:min-h-[460px] lg:min-h-[520px] flex items-center justify-center">
+              {/* subtle dots */}
+              <div className="absolute inset-0 opacity-[0.18] bg-[radial-gradient(#C68532_0.7px,transparent_0.7px)] bg-size-[18px_18px]" />
+
+              {/* center illustration */}
+              <motion.img
+                src="/image/hero1.png"
+                alt="Therapy session illustration"
+                className="relative z-10 w-[88%] sm:w-[84%] md:w-[76%] lg:w-[88%] h-auto select-none"
+                initial={{ scale: 0.96, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+                draggable={false}
               />
-            </motion.div>
+
+              {/* round ring */}
+              <motion.div
+                className="absolute inset-4 sm:inset-6 md:inset-10 rounded-full border border-[#C68532]/25"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.25 }}
+              />
+              <motion.div
+                className="absolute inset-9 sm:inset-11 md:inset-16 rounded-full border border-[#C68532]/15 border-dashed"
+                animate={{ rotate: 360 }}
+                transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
+                aria-hidden="true"
+              />
+
+              {/* icons around (round type) */}
+              {[
+                { pos: 'left-1/2 top-1 -translate-x-1/2', size: 'h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16', d: 'M21 15a4 4 0 0 1-4 4H9l-4 3v-3H5a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4h12a4 4 0 0 1 4 4z', viewBox: '0 0 24 24' }, // chat
+                { pos: 'right-4 top-1/2 -translate-y-1/2', size: 'h-12 w-12 sm:h-16 sm:w-16 md:h-18 md:w-18', heart: true }, // heart
+                { pos: 'left-4 top-1/2 -translate-y-1/2', size: 'h-12 w-12 sm:h-16 sm:w-16 md:h-18 md:w-18', shield: true }, // shield
+                { pos: 'left-1/2 bottom-1 -translate-x-1/2', size: 'h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16', check: true }, // check
+                { pos: 'right-16 top-10', size: 'h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16', brain: true }, // brain
+                { pos: 'left-16 bottom-10', size: 'h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16', calendar: true }, // calendar
+                { pos: 'left-14 top-12', size: 'h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16', stethoscope: true }, // stethoscope
+                { pos: 'right-14 bottom-12', size: 'h-11 w-11 sm:h-14 sm:w-14 md:h-16 md:w-16', spark: true }, // spark
+              ].map((it, idx) => (
+                <motion.div
+                  key={idx}
+                  className={`absolute ${it.pos} ${it.size} rounded-full bg-white/70 border border-white/60 backdrop-blur-md flex items-center justify-center z-20`}
+                  animate={{ y: [0, idx % 2 === 0 ? -10 : 10, 0] }}
+                  transition={{ duration: 4.8 + idx * 0.2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  {it.heart ? (
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-7 sm:w-7 md:h-8 md:w-8" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z" />
+                    </svg>
+                  ) : it.shield ? (
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-7 sm:w-7 md:h-8 md:w-8" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M9 12l2 2 4-4" />
+                    </svg>
+                  ) : it.check ? (
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 sm:h-7 sm:w-7 md:h-8 md:w-8" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M20 6L9 17l-5-5" />
+                    </svg>
+                  ) : it.brain ? (
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 sm:h-8 sm:w-8 md:h-9 md:w-9" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M8 6a3 3 0 0 1 3-3 3 3 0 0 1 3 3" />
+                      <path d="M8 6a3 3 0 0 0-3 3v1a3 3 0 0 0 2 2.8" />
+                      <path d="M16 6a3 3 0 0 1 3 3v1a3 3 0 0 1-2 2.8" />
+                      <path d="M7 12a3 3 0 0 0 1 5.8V20" />
+                      <path d="M17 12a3 3 0 0 1-1 5.8V20" />
+                      <path d="M10 7v14" />
+                      <path d="M14 7v14" />
+                    </svg>
+                  ) : it.calendar ? (
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 sm:h-8 sm:w-8 md:h-9 md:w-9" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M8 2v3M16 2v3" />
+                      <path d="M3 7h18" />
+                      <path d="M5 5h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z" />
+                      <path d="M8 11h4" />
+                      <path d="M8 15h6" />
+                    </svg>
+                  ) : it.stethoscope ? (
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 sm:h-8 sm:w-8 md:h-9 md:w-9" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M6 3v6a6 6 0 0 0 12 0V3" />
+                      <path d="M10 3v6" />
+                      <path d="M14 3v6" />
+                      <path d="M18 14a3 3 0 1 0 3 3" />
+                      <path d="M12 15v2a4 4 0 0 0 4 4" />
+                    </svg>
+                  ) : it.spark ? (
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 sm:h-8 sm:w-8 md:h-9 md:w-9" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d="M12 2l1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5L12 2z" />
+                    </svg>
+                  ) : (
+                    <svg viewBox={it.viewBox} className="h-5 w-5 sm:h-7 sm:w-7 md:h-8 md:w-8" fill="none" stroke="#C68532" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                      <path d={it.d} />
+                    </svg>
+                  )}
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         </div>
       </motion.section>

@@ -52,8 +52,8 @@ export default function ServiceDetail() {
     return (
       <div className="min-h-screen pt-28 px-4 py-16 text-center">
         <SEO
-          title="Service Not Found | Trueself Counselling"
-          description="The service you're looking for doesn't exist. Browse all our online therapy and counselling services at Trueself Counselling."
+          title="Service Not Found | TRUESELF COUNSELLING"
+          description="The service you're looking for doesn't exist. Browse all our online therapy and counselling services at TRUESELF COUNSELLING."
           path={`/services/${slug || ''}`}
           noIndex
         />
@@ -76,7 +76,7 @@ export default function ServiceDetail() {
       image: service.image,
       provider: {
         '@type': 'MedicalBusiness',
-        name: 'Trueself Counselling',
+        name: 'TRUESELF COUNSELLING',
         url: 'https://trueselfcounselling.com/',
         telephone: '+91-8778964644',
         email: 'trueselfcounsellingservices@gmail.com',
@@ -93,7 +93,7 @@ export default function ServiceDetail() {
       url: serviceUrl,
       provider: {
         '@type': 'Organization',
-        name: 'Trueself Counselling',
+        name: 'TRUESELF COUNSELLING',
         url: 'https://trueselfcounselling.com/',
       },
       areaServed: 'IN',
@@ -157,14 +157,14 @@ export default function ServiceDetail() {
     <div className="min-h-screen">
       {/* cspell:ignore logotop */}
       <Helmet>
-        <title>{service.title} | Online Counselling - Trueself</title>
+        <title>{service.title} | Online Counselling - TRUESELF COUNSELLING</title>
         <link rel="icon" href="/logotop.webp" />
         <link rel="shortcut icon" href="/logotop.webp" />
         <link rel="apple-touch-icon" href="/logotop.webp" />
       </Helmet>
       <SEO
-        title={`${service.title} | Online Counselling - Trueself`}
-        description={`${service.shortSummary} Confidential online sessions led by qualified women therapists at Trueself Counselling.`}
+        title={`${service.title} | Online Counselling - TRUESELF COUNSELLING`}
+        description={`${service.shortSummary} Confidential online sessions led by qualified women therapists at TRUESELF COUNSELLING.`}
         keywords={`${service.title}, ${service.bullets.slice(0, 6).join(', ')}, online therapy, online counselling, mental health support`}
         path={`/services/${service.slug}`}
         image={service.image}

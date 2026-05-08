@@ -1,4 +1,4 @@
-# robots.txt for Trueself Counselling
+# robots.txt for TRUESELF COUNSELLING
 # https://trueselfcounselling.com
 
 User-agent: *

@@ -1,5 +1,5 @@
 /* TEAM */
-Site:        Trueself Counselling
+Site:        TRUESELF COUNSELLING
 Contact:     trueselfcounsellingservices [at] gmail.com
 Location:    India
 Languages:   English, Tamil, Malayalam, Kannada, Hindi, Gujarati

@@ -69,7 +69,7 @@ export default function SEO({
 }) {
   useEffect(() => {
     const url = `${SITE_URL}${path.startsWith('/') ? path : `/${path}`}`
-    const fullTitle = title || 'Trueself Counselling | Online Psychotherapy in India'
+    const fullTitle = title || 'TRUESELF COUNSELLING | Online Psychotherapy in India'
 
     document.title = fullTitle
 
@@ -96,7 +96,7 @@ export default function SEO({
     if (description) setMeta('property', 'og:description', description)
     setMeta('property', 'og:url', url)
     setMeta('property', 'og:image', image)
-    setMeta('property', 'og:site_name', 'Trueself Counselling')
+    setMeta('property', 'og:site_name', 'TRUESELF COUNSELLING')
     setMeta('property', 'og:locale', 'en_IN')
 
     setMeta('name', 'twitter:card', 'summary_large_image')

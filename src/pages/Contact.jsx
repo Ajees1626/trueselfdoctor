@@ -64,10 +64,10 @@ const contactJsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
-    name: 'Contact Trueself Counselling',
+    name: 'Contact TRUESELF COUNSELLING',
     url: 'https://trueselfcounselling.com/contact',
     description:
-      'Book an online therapy session with Trueself Counselling. Reach us by phone, email, or fill out our short intake form.',
+      'Book an online therapy session with TRUESELF COUNSELLING. Reach us by phone, email, or fill out our short intake form.',
   },
   {
     '@context': 'https://schema.org',
@@ -124,7 +124,7 @@ export default function Contact() {
 
       const payload = {
         access_key: WEB3FORMS_ACCESS_KEY,
-        subject: 'New Contact Form Submission - True Self Counselling',
+        subject: 'New Contact Form Submission - TRUESELF COUNSELLING',
         from_name: formData.name || 'Website Visitor',
         name: formData.name || '',
         age: formData.age || '',
@@ -159,13 +159,19 @@ export default function Contact() {
     return (
       <div className="min-h-screen">
         <SEO
-          title="Thank You | Trueself Counselling"
+          title="Thank You | TRUESELF COUNSELLING"
           description="Your message has been received. Our team will reach out within 1–2 business days to schedule your therapy session."
           path="/contact"
           noIndex
         />
+        <section className="pt-28 pb-10 sm:pb-12 px-4 sm:px-6 bg-[var(--color-sand)]">
+          <div className="max-w-6xl mx-auto">
+            <ContactWellnessPoll />
+          </div>
+        </section>
+
         <section
-          className="pt-28 pb-16 px-4 sm:px-6"
+          className="pb-16 px-4 sm:px-6"
           style={{
             background: 'linear-gradient(135deg, var(--color-sand) 0%, var(--color-mint) 100%)',
           }}
@@ -198,15 +204,15 @@ export default function Contact() {
     <div className="min-h-screen">
       {/* cspell:ignore logotop */}
       <Helmet>
-        <title>Book a Therapy Session | Contact Trueself Counselling</title>
+        <title>Book a Therapy Session | Contact TRUESELF COUNSELLING</title>
         <link rel="icon" href="/logotop.webp" />
         <link rel="shortcut icon" href="/logotop.webp" />
         <link rel="apple-touch-icon" href="/logotop.webp" />
       </Helmet>
       <SEO
-        title="Book a Therapy Session | Contact Trueself Counselling"
-        description="Book an online therapy session with Trueself Counselling. Confidential intake form, phone, email and WhatsApp support. Sessions in English, Tamil, Malayalam, Kannada, Hindi and Gujarati."
-        keywords="book therapy session, contact therapist, online counselling appointment, mental health booking, psychotherapy India, Trueself Counselling contact"
+        title="Book a Therapy Session | Contact TRUESELF COUNSELLING"
+        description="Book an online therapy session with TRUESELF COUNSELLING. Confidential intake form, phone, email and WhatsApp support. Sessions in English, Tamil, Malayalam, Kannada, Hindi and Gujarati."
+        keywords="book therapy session, contact therapist, online counselling appointment, mental health booking, psychotherapy India, TRUESELF COUNSELLING contact"
         path="/contact"
         jsonLd={contactJsonLd}
       />
@@ -345,12 +351,6 @@ export default function Contact() {
               )}
             </motion.div>
           </AnimatePresence>
-        </div>
-      </section>
-
-      <section className="py-10 sm:py-14 md:py-16 px-4 sm:px-6 bg-[var(--color-sand)]">
-        <div className="max-w-6xl mx-auto">
-          <ContactWellnessPoll />
         </div>
       </section>
     </div>

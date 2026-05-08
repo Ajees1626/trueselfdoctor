@@ -3,7 +3,7 @@ export const faqItems = [
     id: 1,
     question: 'Are sessions online or in-person?',
     answer:
-      'All sessions at Trueself are conducted online, making it accessible and flexible for you to attend from wherever you are.',
+      'All sessions at TRUESELF COUNSELLING are conducted online, making it accessible and flexible for you to attend from wherever you are.',
   },
   {
     id: 2,

@@ -24,7 +24,7 @@ export default function ScrollToTop() {
       <LifeLine
         color="#cca331"
         size="small"
-        text="trueself"
+        text="TRUESELF COUNSELLING"
         textColor="#5a5a5a"
       />
     </div>

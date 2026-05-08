@@ -17,7 +17,7 @@ const servicesJsonLd = [
   {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Therapy Services - Trueself Counselling',
+    name: 'Therapy Services - TRUESELF COUNSELLING',
     itemListElement: services.map((s, i) => ({
       '@type': 'ListItem',
       position: i + 1,
@@ -32,13 +32,13 @@ export default function Services() {
     <main className="min-h-screen bg-[var(--color-ivory)]">
       {/* cspell:ignore logotop */}
       <Helmet>
-        <title>Therapy Services | Individual, Couples, Family & Online Counselling - Trueself</title>
+        <title>Therapy Services | Individual, Couples, Family & Online Counselling - TRUESELF COUNSELLING</title>
         <link rel="icon" href="/logotop.webp" />
         <link rel="shortcut icon" href="/logotop.webp" />
         <link rel="apple-touch-icon" href="/logotop.webp" />
       </Helmet>
       <SEO
-        title="Therapy Services | Individual, Couples, Family & Online Counselling - Trueself"
+        title="Therapy Services | Individual, Couples, Family & Online Counselling - TRUESELF COUNSELLING"
         description="Explore our online therapy services: individual therapy, couples counselling, family therapy, therapy for women, adolescent counselling and group workshops. Confidential, evidence-based and led by qualified women therapists."
         keywords="therapy services, individual therapy, couples therapy, family therapy, therapy for women, adolescent therapy, online counselling India, group therapy workshops, mental health services"
         path="/services"
@@ -84,7 +84,7 @@ export default function Services() {
               Compassionate, Evidence-Based Online Therapy
             </h2>
             <p className="text-sm sm:text-base text-[#5a5248] leading-relaxed">
-              At Trueself Counselling, every service is led by qualified women psychotherapists with
+              At TRUESELF COUNSELLING, every service is led by qualified women psychotherapists with
               years of clinical experience. Whether you need help with anxiety, low mood,
               relationships, parenting, trauma or life transitions, our online sessions adapt to
               your schedule and your preferred language including English, Tamil, Malayalam,
