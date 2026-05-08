@@ -1,12 +1,12 @@
 export const therapists = [
-  {
-    id: 1,
-    name: 'Parita Mehta',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    qualification: 'Msc. Counselling Psychology',
-    experience: '8 years',
-    specialisation: 'Relationship issues, stress, anxiety, low self esteem and confidence, body image, overthinking, dealing with emotions, etc',
-  },
+  // {
+  //   id: 1,
+  //   name: 'Parita Mehta',
+  //   image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+  //   qualification: 'Msc. Counselling Psychology',
+  //   experience: '8 years',
+  //   specialisation: 'Relationship issues, stress, anxiety, low self esteem and confidence, body image, overthinking, dealing with emotions, etc',
+  // },
   {
     id: 2,
     name: 'Swathi Ashok',
@@ -34,7 +34,7 @@ export const therapists = [
   {
     id: 5,
     name: 'Apoorva Shaji',
-    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1778156117/Apoorba_image-01.jpg_result_qxcgdd.webp',
     qualification: 'Msc. Counselling Psychology',
     experience: '9+ years',
     specialisation: 'Stress and anxiety, time management, relationship concerns, trauma, abuse, inner child concerns, self related concerns, grief, anger management concerns, etc',

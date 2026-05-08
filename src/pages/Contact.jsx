@@ -1,25 +1,83 @@
+// cspell:ignore Trueself trueself
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
+import { Helmet } from 'react-helmet'
 import Button from '../components/Button'
 import ContactWellnessPoll from '../components/ContactWellnessPoll'
+import SEO from '../components/SEO'
+
+const PROFESSION_OPTIONS = [
+  'Student',
+  'IT / Software Professional',
+  'Healthcare Professional (Doctor / Nurse)',
+  'Teacher / Educator',
+  'Business / Self-Employed',
+  'Corporate Professional',
+  'Engineer',
+  'Lawyer / Legal Professional',
+  'Government Employee',
+  'Homemaker',
+  'Artist / Creative Professional',
+  'Media / Journalist',
+  'Finance / Banking',
+  'Sales & Marketing',
+  'Hospitality / Service Industry',
+  'Retired',
+  'Unemployed / Between Jobs',
+  'Prefer not to say',
+  'Other',
+]
+
+const LANGUAGE_OPTIONS = [
+  'English',
+  'Tamil',
+  'Malayalam',
+  'Kannada',
+  'Hindi',
+  'Gujarati',
+]
 
 const STEPS = [
   { id: 'name', question: 'Full name', type: 'text', placeholder: 'Your full name' },
   { id: 'age', question: 'Age', type: 'text', placeholder: 'e.g. 28' },
   { id: 'phone', question: 'Phone number', type: 'tel', placeholder: 'e.g. +91 9876543210' },
   { id: 'location', question: 'Location', type: 'text', placeholder: 'City / State' },
-  { id: 'profession', question: 'Profession', type: 'text', placeholder: 'Your profession' },
+  {
+    id: 'profession',
+    question: 'Profession',
+    type: 'select',
+    placeholder: 'Select your profession',
+    options: PROFESSION_OPTIONS,
+  },
   { id: 'concerns', question: 'Concerns to be addressed', type: 'text', placeholder: 'Briefly describe what you would like to work on' },
   { id: 'referral', question: 'Referral name, if any', type: 'text', placeholder: 'Optional' },
-  { id: 'languages', question: 'Languages preferred', type: 'text', placeholder: 'e.g. English, Tamil, Hindi' },
+  {
+    id: 'languages',
+    question: 'Languages preferred',
+    type: 'select',
+    placeholder: 'Select preferred language',
+    options: LANGUAGE_OPTIONS,
+  },
 ]
 
-const contactInfo = {
-  phone: '+91 8778964644',
-  email: 'trueselfcounsellingservices@gmail.com',
-  address: '123 Peaceful Lane, Suite 100, Calm City, CC 12345',
-  hours: 'Mon–Fri 9:00 AM – 6:00 PM, Sat 10:00 AM – 2:00 PM',
-}
+const contactJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact Trueself Counselling',
+    url: 'https://trueselfcounselling.com/contact',
+    description:
+      'Book an online therapy session with Trueself Counselling. Reach us by phone, email, or fill out our short intake form.',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://trueselfcounselling.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://trueselfcounselling.com/contact' },
+    ],
+  },
+]
 
 export default function Contact() {
   const WEB3FORMS_ACCESS_KEY = 'c8aea697-74f4-4ec4-97fd-350e2fcf4704'
@@ -41,6 +99,7 @@ export default function Contact() {
 
   const canNext = () => {
     if (current.id === 'referral') return true
+    if (current.type === 'select') return String(value).trim().length > 0
     if (current.type === 'text' || current.type === 'email' || current.type === 'tel') return value.trim().length > 0
     return true
   }
@@ -99,6 +158,12 @@ export default function Contact() {
   if (submitted) {
     return (
       <div className="min-h-screen">
+        <SEO
+          title="Thank You | Trueself Counselling"
+          description="Your message has been received. Our team will reach out within 1–2 business days to schedule your therapy session."
+          path="/contact"
+          noIndex
+        />
         <section
           className="pt-28 pb-16 px-4 sm:px-6"
           style={{
@@ -125,13 +190,26 @@ export default function Contact() {
             </motion.div>
           </div>
         </section>
-        <ContactDetailsSection />
       </div>
     )
   }
 
   return (
     <div className="min-h-screen">
+      {/* cspell:ignore logotop */}
+      <Helmet>
+        <title>Book a Therapy Session | Contact Trueself Counselling</title>
+        <link rel="icon" href="/logotop.webp" />
+        <link rel="shortcut icon" href="/logotop.webp" />
+        <link rel="apple-touch-icon" href="/logotop.webp" />
+      </Helmet>
+      <SEO
+        title="Book a Therapy Session | Contact Trueself Counselling"
+        description="Book an online therapy session with Trueself Counselling. Confidential intake form, phone, email and WhatsApp support. Sessions in English, Tamil, Malayalam, Kannada, Hindi and Gujarati."
+        keywords="book therapy session, contact therapist, online counselling appointment, mental health booking, psychotherapy India, Trueself Counselling contact"
+        path="/contact"
+        jsonLd={contactJsonLd}
+      />
       {/* Hero */}
       <section
         className="pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 text-center"
@@ -183,7 +261,36 @@ export default function Contact() {
                 {current.question}
               </label>
 
-              {current.options ? (
+              {current.type === 'select' ? (
+                <div className="space-y-4">
+                  <select
+                    value={value}
+                    onChange={(e) => update(e.target.value)}
+                    aria-label={current.question}
+                    className="w-full px-4 py-3.5 sm:py-3 rounded-xl sm:rounded-2xl border-2 border-[var(--color-stone)] focus:border-[var(--color-sage-dark)] focus:ring-0 outline-none transition-colors text-base bg-white"
+                  >
+                    <option value="" disabled>
+                      {current.placeholder || 'Select an option'}
+                    </option>
+                    {current.options.map((opt) => (
+                      <option key={opt} value={opt}>
+                        {opt}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="flex gap-3">
+                    {!isFirst && (
+                      <Button variant="outline" onClick={handleBack} className="flex-1">
+                        Back
+                      </Button>
+                    )}
+                    <Button onClick={handleNext} className="flex-1" disabled={!canNext() || isSubmitting}>
+                      {isLast ? (isSubmitting ? 'Sending...' : 'Submit') : 'Next'}
+                    </Button>
+                  </div>
+                  {submitError && <p className="text-sm text-red-600">{submitError}</p>}
+                </div>
+              ) : current.options ? (
                 <div className="space-y-3">
                   {current.options.map((opt) => (
                     <button
@@ -227,7 +334,7 @@ export default function Contact() {
                 </div>
               )}
 
-              {current.options && (
+              {current.type !== 'select' && current.options && (
                 <div className="flex gap-3 mt-6">
                   {!isFirst && (
                     <Button variant="outline" onClick={handleBack}>
@@ -241,43 +348,11 @@ export default function Contact() {
         </div>
       </section>
 
-      <ContactDetailsSection />
-    </div>
-  )
-}
-
-function ContactDetailsSection() {
-  return (
-    <section className="py-10 sm:py-14 md:py-16 px-4 sm:px-6 bg-[var(--color-sand)]">
-      <div className="max-w-6xl mx-auto">
-        <ContactWellnessPoll />
-        <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-sage-dark)] mb-6 sm:mb-8 text-center">
-          Contact Details
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-          <div className="rounded-xl sm:rounded-2xl bg-white p-4 sm:p-6 border border-[var(--color-stone)]">
-            <ul className="space-y-2 sm:space-y-3 text-sm sm:text-base text-[#5a5a5a]">
-              <li><strong>Phone:</strong> {contactInfo.phone}</li>
-              <li><strong>Email:</strong> {contactInfo.email}</li>
-              <li><strong>Address:</strong> {contactInfo.address}</li>
-              <li><strong>Working Hours:</strong> {contactInfo.hours}</li>
-            </ul>
-          </div>
-          <div className="rounded-xl sm:rounded-2xl overflow-hidden border border-[var(--color-stone)] bg-white min-h-[200px] sm:min-h-[250px]">
-            <iframe
-              title="Office location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.184133376689!2d-73.987845684286!3d40.748440979326!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1635000000000!5m2!1sen!2sus"
-              width="100%"
-              height="250"
-              className="w-full min-h-[200px] sm:min-h-[250px]"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+      <section className="py-10 sm:py-14 md:py-16 px-4 sm:px-6 bg-[var(--color-sand)]">
+        <div className="max-w-6xl mx-auto">
+          <ContactWellnessPoll />
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }

@@ -1,10 +1,49 @@
+// cspell:ignore Trueself trueself
 import { Link } from 'react-router-dom'
 import { motion } from 'motion/react'
+import { Helmet } from 'react-helmet'
 import { services } from '../data/services'
+import SEO from '../components/SEO'
+
+const servicesJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://trueselfcounselling.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://trueselfcounselling.com/services' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Therapy Services - Trueself Counselling',
+    itemListElement: services.map((s, i) => ({
+      '@type': 'ListItem',
+      position: i + 1,
+      url: `https://trueselfcounselling.com/services/${s.slug}`,
+      name: s.title,
+    })),
+  },
+]
 
 export default function Services() {
   return (
     <main className="min-h-screen bg-[var(--color-ivory)]">
+      {/* cspell:ignore logotop */}
+      <Helmet>
+        <title>Therapy Services | Individual, Couples, Family & Online Counselling - Trueself</title>
+        <link rel="icon" href="/logotop.webp" />
+        <link rel="shortcut icon" href="/logotop.webp" />
+        <link rel="apple-touch-icon" href="/logotop.webp" />
+      </Helmet>
+      <SEO
+        title="Therapy Services | Individual, Couples, Family & Online Counselling - Trueself"
+        description="Explore our online therapy services: individual therapy, couples counselling, family therapy, therapy for women, adolescent counselling and group workshops. Confidential, evidence-based and led by qualified women therapists."
+        keywords="therapy services, individual therapy, couples therapy, family therapy, therapy for women, adolescent therapy, online counselling India, group therapy workshops, mental health services"
+        path="/services"
+        jsonLd={servicesJsonLd}
+      />
 
       {/* Premium Hero */}
       <section
@@ -38,6 +77,20 @@ export default function Services() {
       {/* Premium Services Grid */}
       <section className="py-12 sm:py-16 md:py-20 lg:py-28 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
+
+          {/* SEO content block - intro */}
+          <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#3d3528] mb-3">
+              Compassionate, Evidence-Based Online Therapy
+            </h2>
+            <p className="text-sm sm:text-base text-[#5a5248] leading-relaxed">
+              At Trueself Counselling, every service is led by qualified women psychotherapists with
+              years of clinical experience. Whether you need help with anxiety, low mood,
+              relationships, parenting, trauma or life transitions, our online sessions adapt to
+              your schedule and your preferred language including English, Tamil, Malayalam,
+              Kannada, Hindi and Gujarati.
+            </p>
+          </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
             {services.map((service, i) => {

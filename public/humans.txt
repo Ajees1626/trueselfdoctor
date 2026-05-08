@@ -1,0 +1,14 @@
+/* TEAM */
+Site:        Trueself Counselling
+Contact:     trueselfcounsellingservices [at] gmail.com
+Location:    India
+Languages:   English, Tamil, Malayalam, Kannada, Hindi, Gujarati
+
+/* THANKS */
+To every client who trusts us with their story.
+
+/* SITE */
+Last update: 2026-05-07
+Standards:   HTML5, CSS3, ES2022
+Components:  React, Vite, TailwindCSS, Motion
+Software:    Cursor, VS Code

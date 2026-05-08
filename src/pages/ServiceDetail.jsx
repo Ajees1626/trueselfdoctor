@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
+import { Helmet } from 'react-helmet'
 import { getServiceBySlug } from '../data/services'
 import Button from '../components/Button'
+import SEO from '../components/SEO'
 
-// cspell:ignore whatsapp
+// cspell:ignore whatsapp Trueself trueself
 const contactDetails = {
   phone: '+91 8778964644',
-  whatsappNumber: '918778964644', // digits only for wa.me
+  whatsappNumber: '918667344083', // digits only for wa.me
   email: 'trueselfcounsellingservices@gmail.com',
   address: '123 Peaceful Lane, Suite 100, Calm City, CC 12345',
 }
@@ -49,6 +51,12 @@ export default function ServiceDetail() {
   if (!service) {
     return (
       <div className="min-h-screen pt-28 px-4 py-16 text-center">
+        <SEO
+          title="Service Not Found | Trueself Counselling"
+          description="The service you're looking for doesn't exist. Browse all our online therapy and counselling services at Trueself Counselling."
+          path={`/services/${slug || ''}`}
+          noIndex
+        />
         <h1 className="text-2xl font-bold text-(--color-sage-dark)">Service not found</h1>
         <Button to="/services" className="mt-4">
           Back to Services
@@ -56,6 +64,56 @@ export default function ServiceDetail() {
       </div>
     )
   }
+
+  const serviceUrl = `https://trueselfcounselling.com/services/${service.slug}`
+  const serviceJsonLd = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'MedicalTherapy',
+      name: service.title,
+      description: service.description,
+      url: serviceUrl,
+      image: service.image,
+      provider: {
+        '@type': 'MedicalBusiness',
+        name: 'Trueself Counselling',
+        url: 'https://trueselfcounselling.com/',
+        telephone: '+91-8778964644',
+        email: 'trueselfcounsellingservices@gmail.com',
+      },
+      areaServed: { '@type': 'Country', name: 'India' },
+      availableLanguage: ['English', 'Tamil', 'Malayalam', 'Kannada', 'Hindi', 'Gujarati'],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      serviceType: service.title,
+      name: service.title,
+      description: service.shortSummary,
+      url: serviceUrl,
+      provider: {
+        '@type': 'Organization',
+        name: 'Trueself Counselling',
+        url: 'https://trueselfcounselling.com/',
+      },
+      areaServed: 'IN',
+      offers: {
+        '@type': 'Offer',
+        url: serviceUrl,
+        availability: 'https://schema.org/InStock',
+        priceCurrency: 'INR',
+      },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://trueselfcounselling.com/' },
+        { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://trueselfcounselling.com/services' },
+        { '@type': 'ListItem', position: 3, name: service.title, item: serviceUrl },
+      ],
+    },
+  ]
 
   const openPopup = () => {
     setPopupStep(0)
@@ -97,6 +155,22 @@ export default function ServiceDetail() {
 
   return (
     <div className="min-h-screen">
+      {/* cspell:ignore logotop */}
+      <Helmet>
+        <title>{service.title} | Online Counselling - Trueself</title>
+        <link rel="icon" href="/logotop.webp" />
+        <link rel="shortcut icon" href="/logotop.webp" />
+        <link rel="apple-touch-icon" href="/logotop.webp" />
+      </Helmet>
+      <SEO
+        title={`${service.title} | Online Counselling - Trueself`}
+        description={`${service.shortSummary} Confidential online sessions led by qualified women therapists at Trueself Counselling.`}
+        keywords={`${service.title}, ${service.bullets.slice(0, 6).join(', ')}, online therapy, online counselling, mental health support`}
+        path={`/services/${service.slug}`}
+        image={service.image}
+        type="article"
+        jsonLd={serviceJsonLd}
+      />
       {/* Hero */}
       <section
         className="pt-24 sm:pt-28 pb-12 md:pb-16 px-4 sm:px-6"
@@ -148,7 +222,12 @@ export default function ServiceDetail() {
 
               <h2 className="text-xl font-semibold text-[var(--color-sage-dark)] mb-4">Benefits</h2>
               <ul className="space-y-2">
-                {service.bullets.map((b) => (
+                {(service.benefits?.length ? service.benefits : [
+                  'A confidential, non-judgmental space to feel heard',
+                  'Practical coping tools you can use in daily life',
+                  'Better emotional regulation and resilience over time',
+                  'Clarity, self-understanding, and healthier patterns',
+                ]).map((b) => (
                   <li key={b} className="flex items-start gap-2 text-[#5a5a5a]">
                     <span className="text-[var(--color-sage)]">✓</span>
                     {b}

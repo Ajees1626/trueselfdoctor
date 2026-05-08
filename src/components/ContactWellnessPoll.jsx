@@ -1,275 +1,366 @@
-import { useState, useMemo } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { useMemo, useState } from 'react'
 
-const POLL = [
+const SCALE = ['Never', 'Rarely', 'Sometimes', 'Often', 'Almost Always']
+
+const SECTIONS = [
   {
-    id: 1,
-    question: 'How would you rate your current stress level?',
-    baseCounts: [42, 118, 205, 89],
-    options: ['Very low', 'Manageable', 'High', 'Overwhelming'],
+    id: 'emotional-state',
+    title: 'Section 1: Emotional State',
+    subtitle: 'Over the past 2–3 weeks, how often have you experienced the following?',
+    items: [
+      'I feel overwhelmed by small or daily tasks.',
+      'I experience persistent worry or overthinking.',
+      'I feel low, unmotivated, or emotionally drained.',
+      'I find it difficult to regulate my emotions.',
+      'I feel disconnected from myself or others.',
+      'I feel irritable without clearly knowing why.',
+    ],
   },
   {
-    id: 2,
-    question: 'How often do you get restful sleep?',
-    baseCounts: [31, 96, 178, 149],
-    options: ['Every night', 'Most nights', 'Occasionally', 'Rarely'],
+    id: 'stress-coping',
+    title: 'Section 2: Stress & Coping',
+    items: [
+      'I struggle to switch off from work or responsibilities.',
+      'I feel guilty when I rest.',
+      'I avoid difficult conversations or decisions.',
+      'I feel pressure to “hold everything together.”',
+      'My current coping mechanisms feel unhealthy or unsustainable.',
+    ],
   },
   {
-    id: 3,
-    question: 'What best describes your support system?',
-    baseCounts: [156, 203, 98, 47],
-    options: ['Strong', 'Adequate', 'Limited', 'Prefer not to say'],
+    id: 'relationships',
+    title: 'Section 3: Relationships',
+    items: [
+      'I feel misunderstood in close relationships.',
+      'I find it hard to communicate my needs.',
+      'I notice repeated patterns in my relationships that upset me.',
+      'I feel emotionally alone even when I’m not physically alone.',
+    ],
   },
   {
-    id: 4,
-    question: 'Have you had therapy or counselling before?',
-    baseCounts: [214, 167, 89, 34],
-    options: ['Yes, currently', 'Yes, in the past', 'No, considering', 'No'],
+    id: 'self-identity',
+    title: 'Section 4: Self & Identity',
+    items: [
+      'I struggle with self-worth or self-doubt.',
+      'I feel unsure about who I am becoming.',
+      'I am going through a major life transition.',
+      'I often prioritize others over myself at my own expense.',
+    ],
   },
   {
-    id: 5,
-    question: 'What is your main goal for seeking support?',
-    baseCounts: [67, 142, 198, 97],
-    options: ['Anxiety or worry', 'Mood and energy', 'Relationships', 'Work / life balance'],
-  },
-  {
-    id: 6,
-    question: 'How comfortable are you opening up to a professional?',
-    baseCounts: [112, 189, 151, 52],
-    options: ['Very', 'Somewhat', 'A little nervous', 'Unsure yet'],
-  },
-  {
-    id: 7,
-    question: 'Preferred session format?',
-    baseCounts: [145, 176, 124, 59],
-    options: ['In person', 'Video', 'Phone', 'No preference'],
-  },
-  {
-    id: 8,
-    question: 'When would you like to start?',
-    baseCounts: [98, 201, 134, 71],
-    options: ['This week', 'This month', 'Next month', 'Just exploring'],
-  },
-  {
-    id: 9,
-    question: 'What matters most in choosing a therapist?',
-    baseCounts: [88, 156, 142, 118],
-    options: ['Experience', 'Approach and style', 'Location / online', 'Availability'],
-  },
-  {
-    id: 10,
-    question: 'How did you hear about us?',
-    baseCounts: [76, 112, 185, 131],
-    options: ['Search / website', 'Referral', 'Social media', 'Other'],
+    id: 'burnout',
+    title: 'Section 5: Burnout & Exhaustion',
+    items: [
+      'I wake up already feeling tired or anxious.',
+      'I feel emotionally numb at times.',
+      'Things that once brought joy no longer feel fulfilling.',
+      'I feel close to breaking point but continue functioning.',
+    ],
   },
 ]
 
-function countsToDisplay(counts) {
-  const total = counts.reduce((a, b) => a + b, 0) || 1
-  return counts.map((c) => ({
-    count: c,
-    pct: Math.round((c / total) * 1000) / 10,
+const ALL_ITEMS = SECTIONS.flatMap((section) =>
+  section.items.map((text, idx) => ({
+    id: `${section.id}:${idx + 1}`,
+    sectionId: section.id,
+    text,
   }))
+)
+
+const SECTION_TAB_LABELS = {
+  'emotional-state': 'Emotional State',
+  'stress-coping': 'Stress & Coping',
+  relationships: 'Relationships',
+  'self-identity': 'Self & Identity',
+  burnout: 'Burnout',
 }
 
 export default function ContactWellnessPoll() {
-  const WEB3FORMS_ACCESS_KEY = '7daba079-7de1-40c9-a4c6-3542b7d13d3e'
+  const [answers, setAnswers] = useState(() => ({}))
+  const [showResults, setShowResults] = useState(false)
   const [active, setActive] = useState(0)
-  const [pollState, setPollState] = useState(() => ({
-    selection: {},
-    countsByQ: Object.fromEntries(POLL.map((q) => [q.id, [...q.baseCounts]])),
-  }))
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitStatus, setSubmitStatus] = useState('')
 
-  const current = POLL[active]
-  const { selection, countsByQ } = pollState
-  const display = useMemo(
-    () => countsToDisplay(countsByQ[current.id]),
-    [countsByQ, current.id]
-  )
-  const selected = selection[current.id]
-  const isLastQuestion = active === POLL.length - 1
-  const hasSelectedCurrent = selected !== undefined
+  const answeredCount = useMemo(() => Object.keys(answers).length, [answers])
+  const totalCount = ALL_ITEMS.length
+  const isComplete = answeredCount === totalCount
 
-  const vote = (optionIndex) => {
-    setPollState((prev) => {
-      const prevIdx = prev.selection[current.id]
-      if (prevIdx === optionIndex) return prev
-      const row = [...prev.countsByQ[current.id]]
-      if (prevIdx !== undefined) {
-        row[prevIdx] = Math.max(0, row[prevIdx] - 1)
-      }
-      row[optionIndex] = row[optionIndex] + 1
-      return {
-        ...prev,
-        selection: { ...prev.selection, [current.id]: optionIndex },
-        countsByQ: { ...prev.countsByQ, [current.id]: row },
-      }
-    })
-  }
+  const counts = useMemo(() => {
+    const c = Array.from({ length: SCALE.length }, () => 0)
+    for (const v of Object.values(answers)) c[v] += 1
+    return c
+  }, [answers])
 
-  const submitPoll = async () => {
-    const answered = POLL.filter((q) => selection[q.id] !== undefined)
-    const responses = answered.map((q, idx) => {
-      const pickedIndex = selection[q.id]
-      const pickedOption = q.options[pickedIndex]
-      return `${idx + 1}. ${q.question} - ${pickedOption}`
-    })
+  const resultTier = useMemo(() => {
+    const rarelyGroup = counts[0] + counts[1]
+    const sometimesGroup = counts[2]
+    const oftenGroup = counts[3] + counts[4]
 
-    try {
-      setIsSubmitting(true)
-      setSubmitStatus('')
+    const max = Math.max(rarelyGroup, sometimesGroup, oftenGroup)
+    if (max === 0) return null
+    if (oftenGroup === max) return 'often'
+    if (sometimesGroup === max) return 'sometimes'
+    return 'rarely'
+  }, [counts])
 
-      const payload = {
-        access_key: WEB3FORMS_ACCESS_KEY,
-        subject: 'Wellness Poll Response - True Self Counselling',
-        from_name: 'Website Wellness Poll',
-        answered_count: String(answered.length),
-        responses: responses.join('\n'),
-      }
-
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
-      })
-
-      const result = await res.json()
-      if (result.success) {
-        setSubmitStatus('Poll submitted successfully.')
-      } else {
-        setSubmitStatus('Submission failed. Please try again.')
-      }
-    } catch {
-      setSubmitStatus('Network issue. Please try again.')
-    } finally {
-      setIsSubmitting(false)
+  const resultText = useMemo(() => {
+    if (!resultTier) return null
+    if (resultTier === 'rarely') {
+      return 'Mostly “Rarely”: You may simply need reflection tools or preventive support.'
     }
-  }
+    if (resultTier === 'sometimes') {
+      return 'Mostly “Sometimes”: You may benefit from short-term therapy or guided emotional support.'
+    }
+    return 'Mostly “Often/Almost Always”: It may be helpful to consider structured therapy to explore these patterns more deeply.'
+  }, [resultTier])
+
+  const current = ALL_ITEMS[active]
+  const currentSection = useMemo(
+    () => SECTIONS.find((s) => s.id === current.sectionId),
+    [current.sectionId]
+  )
+  const currentSectionId = current.sectionId
+  const selected = answers[current.id]
+  const hasSelectedCurrent = selected !== undefined
+  const isFirst = active === 0
+  const isLast = active === ALL_ITEMS.length - 1
+
+  const sectionStartIndexById = useMemo(() => {
+    const map = {}
+    let idx = 0
+    for (const s of SECTIONS) {
+      map[s.id] = idx
+      idx += s.items.length
+    }
+    return map
+  }, [])
+
+  const sectionRangeById = useMemo(() => {
+    const map = {}
+    for (const s of SECTIONS) {
+      const start = sectionStartIndexById[s.id] ?? 0
+      map[s.id] = { start, end: start + s.items.length - 1 }
+    }
+    return map
+  }, [sectionStartIndexById])
+
+  const currentSectionRange = sectionRangeById[currentSectionId]
+  const sectionAnsweredCount = useMemo(() => {
+    if (!currentSectionRange) return 0
+    let n = 0
+    for (let i = currentSectionRange.start; i <= currentSectionRange.end; i += 1) {
+      if (answers[ALL_ITEMS[i].id] !== undefined) n += 1
+    }
+    return n
+  }, [answers, currentSectionRange])
+
+  const sectionTotalCount = currentSectionRange
+    ? currentSectionRange.end - currentSectionRange.start + 1
+    : 0
 
   return (
-    <div className="mb-10 sm:mb-12 md:mb-14">
-      <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-sage-dark)] mb-2 text-center">
-        Quick check-in
+    <div className="mb-10 sm:mb-12 md:mb-14 w-full min-w-0 pb-24 sm:pb-14 md:pb-16">
+      <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-sage-dark)] mb-2 text-center px-1">
+        The Wellness Check-In
       </h2>
-      <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-2xl mx-auto mb-6 sm:mb-8">
-        Ten short questions. Tap a number to move between them — each has four choices with live
-        community-style counts.
+      <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-3xl mx-auto mb-3 sm:mb-4 px-2 sm:px-0 text-pretty">
+        A gentle self-reflection tool designed to help you understand where you are emotionally.
+      </p>
+      <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-3xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0 text-pretty">
+        This assessment is not a diagnosis. It is a guided check-in to help you gain clarity about your current
+        emotional patterns and decide what kind of support might feel helpful.
       </p>
 
-      <div className="flex flex-wrap justify-center gap-2 sm:gap-2.5 mb-6">
-        {POLL.map((q, i) => (
-          <button
-            key={q.id}
-            type="button"
-            onClick={() => setActive(i)}
-            className={`
-              min-w-[2.25rem] h-9 sm:h-10 px-2.5 rounded-xl text-sm font-semibold transition-all
-              ${
-                i === active
-                  ? 'bg-[var(--color-sage-dark)] text-white shadow-md scale-105'
-                  : selection[q.id] !== undefined
-                    ? 'bg-[var(--color-mint)] text-[var(--color-sage-dark)] border-2 border-[var(--color-sage)]'
-                    : 'bg-white text-[#5a5a5a] border-2 border-[var(--color-stone)] hover:border-[var(--color-sage)]'
-              }
-            `}
-            aria-label={`Question ${i + 1}`}
-            aria-current={i === active ? 'step' : undefined}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
-
-      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[var(--color-stone)] p-4 sm:p-6 md:p-8 shadow-sm max-w-2xl mx-auto">
-        <div className="text-xs sm:text-sm text-[#888] mb-3 text-center">
-          Question {active + 1} of {POLL.length}
-        </div>
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={current.id}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25 }}
-          >
-            <h3 className="text-base sm:text-lg font-semibold text-[#3d3d3d] mb-5 sm:mb-6 text-center">
-              {current.question}
-            </h3>
-            <ul className="space-y-3 sm:space-y-4">
-              {current.options.map((label, i) => {
-                const { count, pct } = display[i]
-                const isSel = selected === i
-                return (
-                  <li key={label}>
-                    <button
-                      type="button"
-                      onClick={() => vote(i)}
-                      className={`
-                        w-full text-left rounded-xl sm:rounded-2xl border-2 overflow-hidden transition-all
-                        ${
-                          isSel
-                            ? 'border-[var(--color-sage-dark)] ring-2 ring-[var(--color-mint)] ring-offset-2'
-                            : 'border-[var(--color-stone)] hover:border-[var(--color-sage)]'
-                        }
-                      `}
-                    >
-                      <div className="flex items-center justify-between gap-3 px-3 sm:px-4 py-2.5 sm:py-3 bg-[var(--color-cream)] relative">
-                        <span
-                          className="absolute inset-0 origin-left bg-[var(--color-mint)]/50 transition-all duration-500"
-                          style={{ transform: `scaleX(${pct / 100})` }}
-                        />
-                        <span className="relative z-10 text-sm sm:text-base font-medium text-[#3d3d3d] pr-2">
-                          {label}
-                        </span>
-                        <span className="relative z-10 flex items-center gap-2 sm:gap-3 shrink-0 text-xs sm:text-sm tabular-nums text-[#5a5a5a]">
-                          <span className="font-semibold text-[var(--color-sage-dark)]">
-                            {pct}%
-                          </span>
-                          <span className="text-[#888] hidden sm:inline">({count})</span>
-                        </span>
-                      </div>
-                    </button>
-                  </li>
-                )
-              })}
-            </ul>
-          </motion.div>
-        </AnimatePresence>
-
-        <div className="flex justify-between items-center gap-3 mt-6 sm:mt-8">
-          <button
-            type="button"
-            onClick={() => setActive((a) => Math.max(0, a - 1))}
-            disabled={active === 0}
-            className="px-4 py-2 rounded-xl border-2 border-[var(--color-stone)] text-sm font-medium text-[#5a5a5a] disabled:opacity-40 disabled:cursor-not-allowed hover:border-[var(--color-sage)]"
-          >
-            Previous
-          </button>
-          {isLastQuestion ? (
+      <div className="rounded-2xl sm:rounded-3xl bg-white border border-[var(--color-stone)] p-3 sm:p-6 md:p-8 shadow-sm max-w-4xl mx-auto w-full min-w-0">
+        <div className="flex flex-col gap-3 mb-5 sm:flex-row sm:items-center sm:justify-between sm:mb-6">
+          <div className="text-sm text-[#5a5a5a] shrink-0">
+            <span className="font-semibold text-[var(--color-sage-dark)]">{answeredCount}</span> / {totalCount} answered
+          </div>
+          <div className="flex flex-col min-[420px]:flex-row gap-2 w-full sm:w-auto sm:flex-row">
             <button
               type="button"
-              onClick={() => void submitPoll()}
-              disabled={isSubmitting || !hasSelectedCurrent}
-              className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)]"
+              onClick={() => setShowResults(true)}
+              disabled={!isComplete}
+              className="w-full min-[420px]:flex-1 sm:w-auto sm:flex-none px-4 py-2.5 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)] disabled:opacity-40 disabled:cursor-not-allowed"
             >
-              {isSubmitting ? 'Submitting...' : 'Submit Poll'}
+              View results
             </button>
-          ) : (
             <button
               type="button"
-              onClick={() => setActive((a) => Math.min(POLL.length - 1, a + 1))}
-              disabled={!hasSelectedCurrent}
-              className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)] disabled:opacity-40 disabled:cursor-not-allowed"
+              onClick={() => {
+                setAnswers({})
+                setShowResults(false)
+                setActive(0)
+              }}
+              className="w-full min-[420px]:flex-1 sm:w-auto sm:flex-none px-4 py-2.5 rounded-xl border-2 border-[var(--color-stone)] text-sm font-medium text-[#5a5a5a] hover:border-[var(--color-sage)]"
             >
-              Next
+              Reset
             </button>
-          )}
+          </div>
         </div>
-        {submitStatus && (
-          <p className={`mt-3 text-sm ${submitStatus.includes('successfully') ? 'text-green-700' : 'text-red-600'}`}>
-            {submitStatus}
+
+        <div className="text-xs sm:text-sm text-[#888] mb-4 space-y-2">
+          <p className="leading-snug">Rate each statement using this scale:</p>
+          <ul className="m-0 p-0 list-none flex flex-wrap gap-x-2 gap-y-1.5 sm:gap-x-3">
+            {SCALE.map((label) => (
+              <li
+                key={label}
+                className="font-semibold text-[#666] text-[11px] sm:text-sm rounded-md bg-[var(--color-cream)]/80 px-2 py-0.5 border border-[var(--color-stone)]/60"
+              >
+                {label}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="-mx-1 px-1 sm:mx-0 sm:px-0 mb-6">
+          <div
+            className="flex gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:justify-center sm:overflow-visible [-webkit-overflow-scrolling:touch] [scrollbar-width:thin]"
+            role="tablist"
+            aria-label="Survey sections"
+          >
+          {SECTIONS.map((s) => {
+            const isActiveSection = s.id === currentSectionId
+            const startIdx = sectionStartIndexById[s.id] ?? 0
+            const endIdx = startIdx + s.items.length - 1
+            let answeredInSection = 0
+            for (let i = startIdx; i <= endIdx; i += 1) {
+              if (answers[ALL_ITEMS[i].id] !== undefined) answeredInSection += 1
+            }
+            const isDone = answeredInSection === s.items.length
+
+            return (
+              <button
+                key={s.id}
+                type="button"
+                onClick={() => {
+                  const range = sectionRangeById[s.id]
+                  if (!range) return
+                  let target = range.start
+                  for (let i = range.start; i <= range.end; i += 1) {
+                    if (answers[ALL_ITEMS[i].id] === undefined) {
+                      target = i
+                      break
+                    }
+                    target = i
+                  }
+                  setActive(target)
+                  setShowResults(false)
+                }}
+                className={`
+                  shrink-0 whitespace-nowrap h-9 sm:h-10 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-semibold transition-all border-2
+                  ${
+                    isActiveSection
+                      ? 'bg-[var(--color-sage-dark)] text-white border-[var(--color-sage-dark)] shadow-md'
+                      : isDone
+                        ? 'bg-[var(--color-mint)] text-[var(--color-sage-dark)] border-[var(--color-sage)]'
+                        : 'bg-white text-[#5a5a5a] border-[var(--color-stone)] hover:border-[var(--color-sage)]'
+                  }
+                `}
+                aria-current={isActiveSection ? 'step' : undefined}
+              >
+                {SECTION_TAB_LABELS[s.id] ?? s.title}
+              </button>
+            )
+          })}
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-[var(--color-stone)] bg-[var(--color-cream)] p-3 sm:p-5 min-w-0">
+          <div className="text-xs sm:text-sm text-[#888] mb-3 text-left sm:text-center px-0.5 break-words">
+            {currentSection?.title} • {sectionAnsweredCount} / {sectionTotalCount} answered
+          </div>
+          <div className="mb-3 text-left sm:text-center px-0.5">
+            {currentSection?.subtitle && (
+              <p className="text-sm text-[#5a5a5a] mt-1 text-pretty leading-relaxed">{currentSection.subtitle}</p>
+            )}
+          </div>
+
+          <div className="text-sm sm:text-base font-medium text-[#3d3d3d] mb-4 text-left sm:text-center px-0.5 break-words text-pretty leading-relaxed">
+            {current.text}
+          </div>
+
+          <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:justify-center">
+            {SCALE.map((label, optionIdx) => {
+              const isSel = selected === optionIdx
+              return (
+                <button
+                  key={label}
+                  type="button"
+                  onClick={() => {
+                    setAnswers((prev) => ({ ...prev, [current.id]: optionIdx }))
+                    setShowResults(false)
+                    setActive((a) => {
+                      if (a >= totalCount - 1) return a
+                      return a + 1
+                    })
+                  }}
+                  className={`inline-flex w-full sm:w-auto sm:min-w-[6.5rem] items-center justify-center px-3 py-2.5 sm:py-2 rounded-xl border-2 text-xs sm:text-sm font-semibold transition-colors ${
+                    isSel
+                      ? 'border-[var(--color-sage-dark)] bg-[var(--color-mint)] text-[var(--color-sage-dark)]'
+                      : 'border-[var(--color-stone)] bg-white text-[#5a5a5a] hover:border-[var(--color-sage)]'
+                  }`}
+                  aria-pressed={isSel}
+                >
+                  {label}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 mt-6 sm:flex sm:justify-between sm:items-center">
+            <button
+              type="button"
+              onClick={() => setActive((a) => Math.max(0, a - 1))}
+              disabled={isFirst}
+              className="px-3 sm:px-4 py-2.5 rounded-xl border-2 border-[var(--color-stone)] text-sm font-medium text-[#5a5a5a] disabled:opacity-40 disabled:cursor-not-allowed hover:border-[var(--color-sage)]"
+            >
+              Previous
+            </button>
+            {isLast ? (
+              <button
+                type="button"
+                onClick={() => setShowResults(true)}
+                disabled={!isComplete || !hasSelectedCurrent}
+                className="px-3 sm:px-4 py-2.5 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)] disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                View results
+              </button>
+            ) : (
+              <button
+                type="button"
+                onClick={() => setActive((a) => Math.min(totalCount - 1, a + 1))}
+                disabled={!hasSelectedCurrent}
+                className="px-3 sm:px-4 py-2.5 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-medium text-[var(--color-sage-dark)] hover:bg-[var(--color-mint)] disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+
+
+        {showResults && isComplete && (
+          <div className="mt-6 rounded-2xl border border-[var(--color-sage)] bg-[var(--color-mint)]/40 p-4 sm:p-5">
+            <h4 className="text-base font-semibold text-[var(--color-sage-dark)] mb-2">After results</h4>
+            <p className="text-sm sm:text-base text-[#3d3d3d] mb-3">
+              {resultText}
+            </p>
+            <p className="text-sm sm:text-base text-[#3d3d3d] mb-4">
+              Your responses suggest that you may be carrying more than you realize. Therapy at True Self offers a confidential,
+              supportive space to understand and work through these patterns with a qualified therapist.
+            </p>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-semibold text-[var(--color-sage-dark)] bg-white hover:bg-[var(--color-cream)]"
+            >
+              Book a slot
+            </button>
+          </div>
+        )}
+        {!isComplete && (
+          <p className="mt-4 text-sm text-[#888]">
+            Answer all statements to view your results.
           </p>
         )}
       </div>

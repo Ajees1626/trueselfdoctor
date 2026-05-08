@@ -1,13 +1,56 @@
+// cspell:ignore Trueself trueself
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'motion/react'
+import { Helmet } from 'react-helmet'
 import Button from '../components/Button'
 import FAQAccordion from '../components/FAQAccordion'
 import ServicesSlider from '../components/ServicesSlider'
 import TherapistDetails from '../components/TherapistDetails'
 import AnimatedCounter from '../components/AnimatedCounter'
+import SEO from '../components/SEO'
 import { testimonials } from '../data/testimonials'
 import { faqItems } from '../data/faq'
+
+const homeJsonLd = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'MedicalBusiness',
+    name: 'Trueself Counselling',
+    url: 'https://trueselfcounselling.com/',
+    image:
+      'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp',
+    telephone: '+91-8778964644',
+    email: 'trueselfcounsellingservices@gmail.com',
+    priceRange: '$$',
+    medicalSpecialty: ['Psychiatric', 'Psychotherapy'],
+    areaServed: 'IN',
+    availableLanguage: ['English', 'Tamil', 'Malayalam', 'Kannada', 'Hindi', 'Gujarati'],
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '700',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://trueselfcounselling.com/' },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((f) => ({
+      '@type': 'Question',
+      name: f.question,
+      acceptedAnswer: { '@type': 'Answer', text: f.answer },
+    })),
+  },
+]
 
 const highlights = [
   'This is a Space to Reflect',
@@ -53,6 +96,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      {/* cspell:ignore logotop */}
+      <Helmet>
+        <title>Trueself Counselling | Online Psychotherapy & Mental Health Services in India</title>
+        <link rel="icon" href="/logotop.webp" />
+        <link rel="shortcut icon" href="/logotop.webp" />
+        <link rel="apple-touch-icon" href="/logotop.webp" />
+      </Helmet>
+      <SEO
+        title="Trueself Counselling | Online Psychotherapy & Mental Health Services in India"
+        description="Confidential online psychotherapy by qualified women therapists. Book sessions for anxiety, depression, couples, family and trauma therapy in English, Tamil, Malayalam, Kannada, Hindi & Gujarati."
+        keywords="online therapy India, psychotherapy, anxiety counselling, depression therapy, couples therapy, family therapy, women therapists, mental health, online counsellor, therapy in Tamil, therapy in Hindi, Trueself Counselling"
+        path="/"
+        jsonLd={homeJsonLd}
+      />
       {/* Hero */}
       <motion.section
         className="relative min-h-[85vh] sm:min-h-[90vh] md:min-h-[95vh] flex items-center overflow-hidden px-4 sm:px-6 md:px-12 lg:px-20 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24"
@@ -204,7 +261,7 @@ export default function Home() {
 
       <div className="relative rounded-xl sm:rounded-[2rem] overflow-hidden shadow-[0_25px_60px_-15px_rgba(0,0,0,0.15)] w-full max-w-sm sm:max-w-md mx-auto md:mx-0 aspect-[3/4] sm:aspect-[4/5] min-h-[320px] sm:min-h-[400px]">
         <img
-          src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp"
+          src="https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1778156117/Apoorba_image-01.jpg_result_qxcgdd.webp"
           alt="Professional Psychotherapist"
           className="w-full h-full object-cover"
         />

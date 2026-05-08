@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from 'motion/react'
 
-const DEFAULT_POSTER = 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=500&h=600&fit=crop'
+const DEFAULT_POSTER = 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1778217484/IMG_6184.JPG_result_ynqdcd.webp'
 const DEFAULT_SUMMARY = 'Compassionate psychotherapy for a healthier mind. Book a session or quick chat with us—we\'re here to support your emotional wellbeing.'
 
 export default function WelcomePopup({ visible, onClose, poster = DEFAULT_POSTER, summary = DEFAULT_SUMMARY }) {

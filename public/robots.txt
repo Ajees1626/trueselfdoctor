@@ -1,0 +1,37 @@
+# robots.txt for Trueself Counselling
+# https://trueselfcounselling.com
+
+User-agent: *
+Allow: /
+Disallow: /assets/
+Disallow: /*.json$
+
+# Block known bad / aggressive crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Allow major search engines explicitly
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Sitemap
+Sitemap: https://trueselfcounselling.com/sitemap.xml
+Host: https://trueselfcounselling.com

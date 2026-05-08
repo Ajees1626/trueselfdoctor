@@ -1,0 +1,28 @@
+{
+  "name": "Trueself Counselling",
+  "short_name": "Trueself",
+  "description": "Online psychotherapy and mental health counselling by qualified women therapists.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fbf8f3",
+  "theme_color": "#C68532",
+  "lang": "en-IN",
+  "dir": "ltr",
+  "categories": ["health", "medical", "lifestyle", "wellness"],
+  "icons": [
+    {
+      "src": "https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777101455/logo1_result_v2bola.webp",
+      "sizes": "192x192",
+      "type": "image/webp",
+      "purpose": "any"
+    },
+    {
+      "src": "https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777101455/logo1_result_v2bola.webp",
+      "sizes": "512x512",
+      "type": "image/webp",
+      "purpose": "any maskable"
+    }
+  ]
+}
