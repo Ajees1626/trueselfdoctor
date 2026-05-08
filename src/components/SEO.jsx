@@ -1,7 +1,7 @@
 // cspell:ignore Trueself trueself logotop jsonld
 import { useEffect } from 'react'
 
-const SITE_URL = 'https://trueselfcounselling.com'
+const SITE_URL = 'https://trueselfcounsellingservices.com'
 const DEFAULT_IMAGE =
   'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp'
 const DEFAULT_FAVICON = '/logotop.webp'
