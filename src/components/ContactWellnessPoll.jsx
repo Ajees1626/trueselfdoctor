@@ -1,4 +1,6 @@
+// cspell:ignore TRUESELF
 import { useMemo, useState } from 'react'
+import Button from './Button'
 
 const SCALE = ['Never', 'Rarely', 'Sometimes', 'Often', 'Almost Always']
 
@@ -75,7 +77,7 @@ const SECTION_TAB_LABELS = {
   burnout: 'Burnout',
 }
 
-export default function ContactWellnessPoll() {
+export default function ContactWellnessPoll({ hideIntro = false }) {
   const [answers, setAnswers] = useState(() => ({}))
   const [showResults, setShowResults] = useState(false)
   const [active, setActive] = useState(0)
@@ -157,20 +159,40 @@ export default function ContactWellnessPoll() {
     ? currentSectionRange.end - currentSectionRange.start + 1
     : 0
 
+  const progressPct = totalCount ? Math.round((answeredCount / totalCount) * 100) : 0
+
   return (
     <div className="mb-10 sm:mb-12 md:mb-14 w-full min-w-0 pb-24 sm:pb-14 md:pb-16">
-      <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-sage-dark)] mb-2 text-center px-1">
-        The Wellness Check-In
-      </h2>
-      <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-3xl mx-auto mb-3 sm:mb-4 px-2 sm:px-0 text-pretty">
-        A gentle self-reflection tool designed to help you understand where you are emotionally.
-      </p>
-      <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-3xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0 text-pretty">
-        This assessment is not a diagnosis. It is a guided check-in to help you gain clarity about your current
-        emotional patterns and decide what kind of support might feel helpful.
-      </p>
+      {!hideIntro && (
+        <>
+          <h2 className="text-xl sm:text-2xl font-bold text-[var(--color-sage-dark)] mb-2 text-center px-1">
+            The Wellness Check-In
+          </h2>
+          <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-3xl mx-auto mb-3 sm:mb-4 px-2 sm:px-0 text-pretty">
+            A gentle self-reflection tool designed to help you understand where you are emotionally.
+          </p>
+          <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-3xl mx-auto mb-6 sm:mb-8 px-2 sm:px-0 text-pretty">
+            This assessment is not a diagnosis. It is a guided check-in to help you gain clarity about your current
+            emotional patterns and decide what kind of support might feel helpful.
+          </p>
+        </>
+      )}
 
       <div className="rounded-2xl sm:rounded-3xl bg-white border border-[var(--color-stone)] p-3 sm:p-6 md:p-8 shadow-sm max-w-4xl mx-auto w-full min-w-0">
+        <div
+          className="h-1.5 w-full rounded-full bg-[var(--color-stone)]/60 mb-4 sm:mb-5 overflow-hidden"
+          role="progressbar"
+          aria-valuenow={progressPct}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-label="Check-in completion"
+        >
+          <div
+            className="h-full rounded-full bg-[var(--color-sage-dark)] transition-[width] duration-300 ease-out"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+
         <div className="flex flex-col gap-3 mb-5 sm:flex-row sm:items-center sm:justify-between sm:mb-6">
           <div className="text-sm text-[#5a5a5a] shrink-0">
             <span className="font-semibold text-[var(--color-sage-dark)]">{answeredCount}</span> / {totalCount} answered
@@ -340,22 +362,22 @@ export default function ContactWellnessPoll() {
 
 
         {showResults && isComplete && (
-          <div className="mt-6 rounded-2xl border border-[var(--color-sage)] bg-[var(--color-mint)]/40 p-4 sm:p-5">
-            <h4 className="text-base font-semibold text-[var(--color-sage-dark)] mb-2">After results</h4>
-            <p className="text-sm sm:text-base text-[#3d3d3d] mb-3">
-              {resultText}
-            </p>
-            <p className="text-sm sm:text-base text-[#3d3d3d] mb-4">
-              Your responses suggest that you may be carrying more than you realize. Therapy at True Self offers a confidential,
-              supportive space to understand and work through these patterns with a qualified therapist.
-            </p>
-            <button
-              type="button"
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="px-4 py-2 rounded-xl border-2 border-[var(--color-sage-dark)] text-sm font-semibold text-[var(--color-sage-dark)] bg-white hover:bg-[var(--color-cream)]"
-            >
-              Book a slot
-            </button>
+          <div className="mt-6 rounded-2xl border border-[var(--color-sage)] bg-[var(--color-mint)]/40 p-4 sm:p-6 space-y-4">
+            <div>
+              <h4 className="text-base font-semibold text-[var(--color-sage-dark)] mb-2">Your snapshot</h4>
+              <p className="text-sm sm:text-base text-[#3d3d3d]">{resultText}</p>
+            </div>
+
+            <div>
+              <h4 className="text-base font-semibold text-[var(--color-sage-dark)] mb-2">Next steps</h4>
+              <p className="text-sm sm:text-base text-[#3d3d3d] mb-4">
+                Your responses suggest that you may be carrying more than you realize. Therapy at TRUESELF COUNSELLING offers a confidential,
+                supportive space to understand and work through these patterns with a qualified therapist.
+              </p>
+              <Button to="/contact" variant="primary" className="w-full sm:w-auto text-center">
+                Book a slot
+              </Button>
+            </div>
           </div>
         )}
         {!isComplete && (

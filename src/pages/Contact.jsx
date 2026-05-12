@@ -60,6 +60,13 @@ const STEPS = [
   },
 ]
 
+const DIRECT_CONTACT = {
+  email: 'trueselfcounsellingservices@gmail.com',
+  phoneDisplay: '+91 8667344083',
+  phoneTel: '+918667344083',
+  whatsappHref: 'https://wa.me/918667344083',
+}
+
 const contactJsonLd = [
   {
     '@context': 'https://schema.org',
@@ -78,6 +85,10 @@ const contactJsonLd = [
     ],
   },
 ]
+
+/** Hero background — warm, calm (Unsplash). Same family as Wellness page; swap URL to use your own asset. */
+const HERO_BG_IMAGE =
+  'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1778582785/33_result_y3au1p.webp'
 
 export default function Contact() {
   const WEB3FORMS_ACCESS_KEY = 'c8aea697-74f4-4ec4-97fd-350e2fcf4704'
@@ -218,26 +229,34 @@ export default function Contact() {
       />
       {/* Hero */}
       <section
-        className="pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 text-center"
+        className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 text-center overflow-hidden"
         style={{
-          background: 'linear-gradient(135deg, var(--color-ivory) 0%, var(--color-sky) 50%, var(--color-mint) 100%)',
+          backgroundImage: `url('${HERO_BG_IMAGE}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
         }}
       >
-        <motion.h1
-          className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#3d3d3d] mb-3 sm:mb-4 px-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          Book Now
-        </motion.h1>
-        <motion.p
-          className="text-sm sm:text-base md:text-lg text-[#5a5a5a] max-w-xl mx-auto px-2"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1 }}
-        >
-          Share a few details so we can get in touch and schedule your session.
-        </motion.p>
+        <div
+          className="absolute inset-0 bg-gradient-to-br from-[var(--color-ivory)]/92 via-[var(--color-sky)]/78 to-[var(--color-mint)]/88 backdrop-blur-[2px]"
+          aria-hidden="true"
+        />
+        <div className="relative z-10 max-w-3xl mx-auto">
+          <motion.h1
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#3d3d3d] mb-3 sm:mb-4 px-2 drop-shadow-sm"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            Book Now
+          </motion.h1>
+          <motion.p
+            className="text-sm sm:text-base md:text-lg text-[#5a5a5a] max-w-xl mx-auto px-2 text-pretty"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+          >
+            Share a few details so we can get in touch and schedule your session.
+          </motion.p>
+        </div>
       </section>
 
       {/* Multi-step form */}

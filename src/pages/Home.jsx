@@ -699,12 +699,12 @@ export default function Home() {
     <p className="text-gray-600 mb-4">
       Still have questions or need guidance?
     </p>
-    <a
-      href="/contact"
+    <Link
+      to="/contact"
       className="inline-block px-8 py-3 rounded-full bg-[#C68532] text-white font-medium shadow-md hover:bg-[#B8762F] transition duration-300"
     >
-      Contact  
-    </a>
+      Contact
+    </Link>
   </div>
 
 </div>

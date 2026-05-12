@@ -5,6 +5,7 @@ import { motion } from 'motion/react'
 const links = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
+  { to: '/wellness-check-in', label: 'Free Assessment' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -52,7 +53,7 @@ export default function Footer() {
               
             </h2>
             <p className="text-xs sm:text-sm text-[var(--color-sand)]/90 leading-relaxed">
-              Compassionate psychotherapy for a healthier mind. Online and in-person sessions.
+              Compassionate psychotherapy for a healthier mind.  
             </p>
           </div>
 

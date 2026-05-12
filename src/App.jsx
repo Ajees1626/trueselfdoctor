@@ -9,6 +9,7 @@ import Home from './pages/Home'
 import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Contact from './pages/Contact'
+import WellnessCheckIn from './pages/WellnessCheckIn'
 
 export default function App() {
   const [showWelcomePopup, setShowWelcomePopup] = useState(false)
@@ -35,6 +36,7 @@ export default function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/wellness-check-in" element={<WellnessCheckIn />} />
           </Routes>
         </main>
         <Footer />

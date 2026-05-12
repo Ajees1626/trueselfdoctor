@@ -7,6 +7,7 @@ import Button from './Button'
 const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/services', label: 'Services' },
+  { to: '/wellness-check-in', label: 'Free Assessment' },
   { to: '/contact', label: 'Contact' },
 ]
 
