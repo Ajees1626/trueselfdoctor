@@ -48,7 +48,7 @@ export default function TherapistDetails() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -direction * 60 }}
             transition={{ duration: 0.5 }}
-            className="relative overflow-hidden rounded-3xl bg-white/90 backdrop-blur-xl shadow-[0_40px_80px_-20px_rgba(198,133,50,0.25)] border border-[#E8DCC6]"
+            className="relative overflow-hidden rounded-3xl bg-[#FFFFFF] backdrop-blur-xl shadow-[0_40px_80px_-20px_rgba(198,133,50,0.25)] border border-[#E8DCC6]"
           >
             <div className="grid grid-cols-1 md:grid-cols-2">
 
@@ -75,7 +75,7 @@ export default function TherapistDetails() {
               </div>
 
               {/* Details Section */}
-              <div className="flex flex-col justify-center p-6 sm:p-8 md:p-12 bg-gradient-to-br from-white to-[#faf7f1]">
+              <div className="flex flex-col justify-center p-6 sm:p-8 md:p-12 bg-gradient-to-br from-white to-[#FFFFFF]">
                 <div className="border-l-4 border-[#C68532] pl-4 sm:pl-6">
 
                   <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 tracking-tight mb-2">
@@ -137,7 +137,7 @@ export default function TherapistDetails() {
           <div className="flex gap-3 sm:gap-4 justify-center sm:justify-end w-full sm:w-auto order-1 sm:order-2">
             <button
               onClick={goPrev}
-              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#E8DCC6] bg-white shadow-md hover:bg-[#f5efe5] transition flex items-center justify-center"
+              className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-[#E8DCC6] bg-white shadow-md hover:bg-[#f5f5f5] transition flex items-center justify-center"
             >
               <svg className="w-5 h-5 text-[#C68532]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

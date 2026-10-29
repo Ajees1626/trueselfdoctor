@@ -29,7 +29,7 @@ export default function Navbar() {
       role="banner"
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? 'bg-[var(--color-ivory)]/95 shadow-md backdrop-blur border-b border-[var(--color-stone)]'
+          ? 'bg-[#FFFFFF]/95 shadow-md backdrop-blur border-b border-[var(--color-stone)]'
           : 'bg-transparent'
       }`}
       initial={{ y: -20 }}
@@ -93,7 +93,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="p-2 rounded-xl text-[#5a5a5a] hover:bg-[var(--color-sand)]"
+            className="p-2 rounded-xl text-[#5a5a5a] hover:bg-[#f5f5f5]"
             onClick={() => setMobileOpen((o) => !o)}
             aria-label="Toggle mobile menu"
             aria-expanded={mobileOpen}
@@ -121,7 +121,7 @@ export default function Navbar() {
         {mobileOpen && (
           <motion.div
             id="mobile-menu"
-            className="md:hidden border-t border-[var(--color-stone)] bg-[var(--color-ivory)]"
+            className="md:hidden border-t border-[var(--color-stone)] bg-[#FFFFFF]"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -138,7 +138,7 @@ export default function Navbar() {
                       className={`block py-3.5 sm:py-3 px-4 rounded-xl font-medium text-base ${
                         isActive
                           ? 'text-[var(--color-sage-dark)] bg-[var(--color-mint)]'
-                          : 'text-[#5a5a5a] hover:bg-[var(--color-sand)]'
+                          : 'text-[#5a5a5a] hover:bg-[#f5f5f5]'
                       }`}
                     >
                       {label}

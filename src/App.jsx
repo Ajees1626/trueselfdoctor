@@ -1,34 +1,20 @@
-import { useState, useEffect } from 'react'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import ScrollToTop from './components/ScrollToTop'
-import WelcomePopup from './components/WelcomePopup'
-import SideFloatingBar from './components/SideFloatingBar'
+import SocialFloatIcons from './components/SocialFloatIcons'
 import Home from './pages/Home'
 import Services from './pages/Services'
 import ServiceDetail from './pages/ServiceDetail'
 import Contact from './pages/Contact'
 import WellnessCheckIn from './pages/WellnessCheckIn'
+import PrivacyPolicy from './pages/PrivacyPolicy'
 
 export default function App() {
-  const [showWelcomePopup, setShowWelcomePopup] = useState(false)
-  const [showSideBar, setShowSideBar] = useState(false)
-
-  useEffect(() => {
-    const t1 = setTimeout(() => setShowWelcomePopup(true), 10000)
-    return () => clearTimeout(t1)
-  }, [])
-
-  useEffect(() => {
-    const t2 = setTimeout(() => setShowSideBar(true), 11000)
-    return () => clearTimeout(t2)
-  }, [])
-
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col bg-[var(--color-ivory)] text-[#4A4A4A]">
+      <div className="min-h-screen flex flex-col bg-[#FFFFFF] text-[#4A4A4A]">
         <Navbar />
         <main className="flex-1">
           <Routes>
@@ -37,16 +23,13 @@ export default function App() {
             <Route path="/services/:slug" element={<ServiceDetail />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/wellness-check-in" element={<WellnessCheckIn />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-and-conditions" element={<Navigate to="/privacy-policy" replace />} />
           </Routes>
         </main>
         <Footer />
       </div>
-
-      <WelcomePopup
-        visible={showWelcomePopup}
-        onClose={() => setShowWelcomePopup(false)}
-      />
-      <SideFloatingBar visible={showSideBar} />
+      <SocialFloatIcons />
     </BrowserRouter>
   )
 }

@@ -70,7 +70,7 @@ export default function ServicesSlider() {
   
             {/* RIGHT VISUAL AREA */}
             <div className="hidden md:flex justify-center">
-              <div className="w-72 h-72 rounded-4xl overflow-hidden border border-[#EDE4D4] bg-[#f8f6f2] shadow-[0_20px_45px_-20px_rgba(198,133,50,0.25)]">
+              <div className="w-72 h-72 rounded-4xl overflow-hidden border border-[#EDE4D4] bg-[#FFFFFF] shadow-[0_20px_45px_-20px_rgba(198,133,50,0.25)]">
                 {item.image ? (
                   <img
                     src={item.image}
@@ -118,7 +118,7 @@ export default function ServicesSlider() {
           <button
             type="button"
             onClick={goPrev}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-md border border-[#e5ece9] hover:bg-[#f2f7f5] transition flex items-center justify-center touch-manipulation"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white shadow-md border border-[#e5ece9] hover:bg-[#f5f5f5] transition flex items-center justify-center touch-manipulation"
           >
             <svg className="w-5 h-5 text-[#C68532]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />

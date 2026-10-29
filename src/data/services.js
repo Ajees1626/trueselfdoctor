@@ -1,5 +1,5 @@
 // cspell:ignore TRUESELF COUNSELLING Personalised behavioural
-import { FaHeart, FaHome, FaLeaf, FaRainbow, FaUser, FaUsers } from 'react-icons/fa'
+import { FaHeart, FaHome, FaLeaf, FaRainbow, FaUser } from 'react-icons/fa'
 
 export const services = [
   {
@@ -116,29 +116,6 @@ export const services = [
     ],
     icon: FaRainbow,
   },
-  {
-    slug: 'workshops-group',
-    title: 'Workshops & Group Sessions',
-    shortSummary: 'Thoughtfully designed reflective spaces combining psychological insight with shared experience.',
-    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777099662/Workshops_Group_Sessions_result_eizedu.webp',
-    description: 'At TRUESELF COUNSELLING, our workshops and group sessions are thoughtfully designed reflective spaces that combine psychological insight with shared experience. These sessions focus on themes such as emotional resilience, self-care, relationship patterns, stress management, and life transitions.',
-    bullets: [
-      'Emotional resilience',
-      'Self-care practices',
-      'Relationship patterns',
-      'Stress management',
-      'Life transitions',
-      'Shared learning in a supportive group',
-    ],
-    benefits: [
-      'Learn alongside others with similar goals',
-      'Practical tools in a structured format',
-      'Community and reduced isolation',
-      'Ongoing support through themed programmes',
-    ],
-    icon: FaUsers,
-  },
- 
 ]
 
 export const getServiceBySlug = (slug) => services.find((s) => s.slug === slug)

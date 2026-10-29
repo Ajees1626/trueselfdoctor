@@ -7,14 +7,14 @@
   --color-gold: #D9A75C;
   --color-gold-light: #EAD1A3;
   /* Mapped for site-wide use */
-  --color-cream: #FBF8F3;
-  --color-sand: #F7F2E8;
+  --color-cream: #FFFFFF;
+  --color-sand: #FFFFFF;
   --color-sage: #D9A75C;
   --color-sage-dark: #C68532;
   --color-mint: #EAD1A3;
   --color-sky: #EAD1A3;
   --color-sky-dark: #D9A75C;
-  --color-ivory: #FFFEF9;
+  --color-ivory: #FFFFFF;
   --color-stone: #EDE6DC;
   --font-sans: "DM Sans", system-ui, sans-serif;
   --font-wellness-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -28,7 +28,7 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-sans);
-  background-color: var(--color-ivory);
+  background-color: #FFFFFF;
   color: #4A4A4A;
 }
 

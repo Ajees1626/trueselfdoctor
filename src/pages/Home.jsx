@@ -20,7 +20,7 @@ const homeJsonLd = [
     url: 'https://trueselfcounselling.com/',
     image:
       'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1777182274/IMG_6011.JPG_result_zdkoaz.webp',
-    telephone: '+91-8778964644',
+    telephone: '+91-9962042989',
     email: 'trueselfcounsellingservices@gmail.com',
     priceRange: '$$',
     medicalSpecialty: ['Psychiatric', 'Psychotherapy'],
@@ -115,7 +115,7 @@ export default function Home() {
         className="relative min-h-[85vh] sm:min-h-[90vh] md:min-h-[95vh] flex items-center overflow-hidden px-4 sm:px-6 md:px-12 lg:px-20 pt-24 sm:pt-28 md:pt-32 pb-16 sm:pb-20 md:pb-24"
         style={{
           background:
-            "linear-gradient(135deg, #fbf8f3 0%, #f7f2e8 40%, #F0E6D0 100%)",
+            "linear-gradient(135deg, #FFFFFF 0%, #FFFFFF 40%, #FFFFFF 100%)",
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -129,7 +129,7 @@ export default function Home() {
           transition={{ duration: 1.2, delay: 0.2 }}
         />
         <motion.div
-          className="absolute -bottom-24 -left-24 w-[380px] h-[380px] bg-[#F0E6D0] opacity-30 rounded-full blur-3xl"
+          className="absolute -bottom-24 -left-24 w-[380px] h-[380px] bg-[#FFFFFF] opacity-30 rounded-full blur-3xl"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 0.3, scale: 1 }}
           transition={{ duration: 1.2, delay: 0.4 }}
@@ -320,7 +320,7 @@ export default function Home() {
       </motion.section>
 
       {/* About Us */}
-      <section className="relative py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f9f8f6] overflow-hidden">
+      <section className="relative py-14 sm:py-20 md:py-28 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#FFFFFF] overflow-hidden">
   
   {/* Soft background accent */}
   <div className="absolute top-0 right-0 w-48 sm:w-72 h-48 sm:h-72 bg-[#EAD1A3] rounded-full blur-3xl opacity-40" />
@@ -428,11 +428,11 @@ export default function Home() {
 </section>
 
       {/* Animated counters */}
-      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f4f7f5] overflow-hidden">
+      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#FFFFFF] overflow-hidden">
 
 {/* Soft background blur accents */}
-<div className="absolute top-0 left-0 w-80 h-80 bg-[#F0E6D0] rounded-full blur-3xl opacity-40" />
-<div className="absolute bottom-0 right-0 w-96 h-96 bg-[#EDE4D4] rounded-full blur-3xl opacity-40" />
+<div className="absolute top-0 left-0 w-80 h-80 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
+<div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
 
 <div className="relative max-w-7xl mx-auto">
 
@@ -482,11 +482,11 @@ export default function Home() {
 </section>
 
       {/* Services slider */}
-      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f8f9f7] overflow-hidden">
+      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#FFFFFF] overflow-hidden">
 
 {/* Soft background accents */}
-<div className="absolute top-0 right-0 w-80 h-80 bg-[#F0E6D0] rounded-full blur-3xl opacity-40" />
-<div className="absolute bottom-0 left-0 w-96 h-96 bg-[#EDE4D4] rounded-full blur-3xl opacity-40" />
+<div className="absolute top-0 right-0 w-80 h-80 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
+<div className="absolute bottom-0 left-0 w-96 h-96 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
 
 <div className="relative max-w-6xl mx-auto text-center mb-16">
 
@@ -532,9 +532,9 @@ export default function Home() {
 </section>
 
       {/* Therapist Details */}
-      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden" style={{ background: 'linear-gradient(180deg, #faf8f5 0%, #f5f0e8 100%)' }}>
+      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 overflow-hidden" style={{ background: '#FFFFFF' }}>
         <div className="absolute top-0 right-0 w-72 h-72 bg-[#EAD1A3] rounded-full blur-3xl opacity-30" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#EDE4D4] rounded-full blur-3xl opacity-40" />
+        <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
         <div className="relative max-w-7xl mx-auto">
           <motion.div
             className="text-center mb-12 sm:mb-16"
@@ -557,11 +557,11 @@ export default function Home() {
       </section>
 
       {/* Testimonials */}
-      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f6f7f5] overflow-hidden">
+      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#FFFFFF] overflow-hidden">
 
 {/* Soft Background Accents */}
-<div className="absolute top-0 left-0 w-80 h-80 bg-[#F0E6D0] rounded-full blur-3xl opacity-40" />
-<div className="absolute bottom-0 right-0 w-96 h-96 bg-[#EDE4D4] rounded-full blur-3xl opacity-40" />
+<div className="absolute top-0 left-0 w-80 h-80 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
+<div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
 
 <div className="relative max-w-7xl mx-auto">
 
@@ -617,7 +617,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => setTestimonialSlideIndex((i) => (i <= 0 ? maxSlide : i - 1))}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border border-[#EDE4D4] shadow-sm flex items-center justify-center text-[#C68532] hover:bg-[#F0E6D0] transition-colors"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white border border-[#EDE4D4] shadow-sm flex items-center justify-center text-[#C68532] hover:bg-[#EAD1A3] transition-colors"
             aria-label="Previous"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -660,11 +660,11 @@ export default function Home() {
 </section>
 
       {/* FAQ */}
-      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#f7f8f6] overflow-hidden">
+      <section className="relative py-14 sm:py-20 md:py-24 px-4 sm:px-6 md:px-12 lg:px-20 bg-[#FFFFFF] overflow-hidden">
 
 {/* Soft Background Accents */}
-<div className="absolute top-0 left-0 w-80 h-80 bg-[#F0E6D0] rounded-full blur-3xl opacity-40" />
-<div className="absolute bottom-0 right-0 w-96 h-96 bg-[#EDE4D4] rounded-full blur-3xl opacity-40" />
+<div className="absolute top-0 left-0 w-80 h-80 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
+<div className="absolute bottom-0 right-0 w-96 h-96 bg-[#FFFFFF] rounded-full blur-3xl opacity-40" />
 
 <div className="relative max-w-4xl mx-auto">
 

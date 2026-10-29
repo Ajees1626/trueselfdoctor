@@ -8,8 +8,8 @@ import SEO from '../components/SEO'
 
 // cspell:ignore whatsapp Trueself trueself
 const contactDetails = {
-  phone: '+91 8778964644',
-  whatsappNumber: '918667344083', // digits only for wa.me
+  phone: '+91 9962042989',
+  whatsappNumber: '919962042989', // digits only for wa.me
   email: 'trueselfcounsellingservices@gmail.com',
   address: '123 Peaceful Lane, Suite 100, Calm City, CC 12345',
 }
@@ -78,7 +78,7 @@ export default function ServiceDetail() {
         '@type': 'MedicalBusiness',
         name: 'TRUESELF COUNSELLING',
         url: 'https://trueselfcounselling.com/',
-        telephone: '+91-8778964644',
+        telephone: '+91-9962042989',
         email: 'trueselfcounsellingservices@gmail.com',
       },
       areaServed: { '@type': 'Country', name: 'India' },
@@ -312,7 +312,7 @@ export default function ServiceDetail() {
                     <button
                       type="button"
                       onClick={closePopup}
-                      className="p-2 rounded-xl text-[#5a5a5a] hover:bg-[var(--color-sand)]"
+                      className="p-2 rounded-xl text-[#5a5a5a] hover:bg-[#f5f5f5]"
                       aria-label="Close"
                     >
                       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

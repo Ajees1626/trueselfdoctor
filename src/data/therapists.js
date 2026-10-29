@@ -39,4 +39,12 @@ export const therapists = [
     experience: '9+ years',
     specialisation: 'Stress and anxiety, time management, relationship concerns, trauma, abuse, inner child concerns, self related concerns, grief, anger management concerns, etc',
   },
+  {
+    id: 6,
+    name: 'Shruthi',
+    image: 'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1781343643/5.1_result_jnxnqh.webp',
+    qualification: 'MPhil Counselling Psychology',
+    experience: '7.5 years',
+    specialisation: 'Anxiety, grief and loss, stress, self-esteem, self growth, relationship concerns, emotional well-being, life transitions, trauma-informed and client-centered therapy, etc',
+  },
 ]

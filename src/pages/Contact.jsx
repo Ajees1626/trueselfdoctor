@@ -1,71 +1,10 @@
-// cspell:ignore Trueself trueself
+// cspell:ignore Trueself trueself replyto
 import { useState } from 'react'
-import { motion, AnimatePresence } from 'motion/react'
+import { motion } from 'motion/react'
 import { Helmet } from 'react-helmet'
 import Button from '../components/Button'
 import ContactWellnessPoll from '../components/ContactWellnessPoll'
 import SEO from '../components/SEO'
-
-const PROFESSION_OPTIONS = [
-  'Student',
-  'IT / Software Professional',
-  'Healthcare Professional (Doctor / Nurse)',
-  'Teacher / Educator',
-  'Business / Self-Employed',
-  'Corporate Professional',
-  'Engineer',
-  'Lawyer / Legal Professional',
-  'Government Employee',
-  'Homemaker',
-  'Artist / Creative Professional',
-  'Media / Journalist',
-  'Finance / Banking',
-  'Sales & Marketing',
-  'Hospitality / Service Industry',
-  'Retired',
-  'Unemployed / Between Jobs',
-  'Prefer not to say',
-  'Other',
-]
-
-const LANGUAGE_OPTIONS = [
-  'English',
-  'Tamil',
-  'Malayalam',
-  'Kannada',
-  'Hindi',
-  'Gujarati',
-]
-
-const STEPS = [
-  { id: 'name', question: 'Full name', type: 'text', placeholder: 'Your full name' },
-  { id: 'age', question: 'Age', type: 'text', placeholder: 'e.g. 28' },
-  { id: 'phone', question: 'Phone number', type: 'tel', placeholder: 'e.g. +91 9876543210' },
-  { id: 'location', question: 'Location', type: 'text', placeholder: 'City / State' },
-  {
-    id: 'profession',
-    question: 'Profession',
-    type: 'select',
-    placeholder: 'Select your profession',
-    options: PROFESSION_OPTIONS,
-  },
-  { id: 'concerns', question: 'Concerns to be addressed', type: 'text', placeholder: 'Briefly describe what you would like to work on' },
-  { id: 'referral', question: 'Referral name, if any', type: 'text', placeholder: 'Optional' },
-  {
-    id: 'languages',
-    question: 'Languages preferred',
-    type: 'select',
-    placeholder: 'Select preferred language',
-    options: LANGUAGE_OPTIONS,
-  },
-]
-
-const DIRECT_CONTACT = {
-  email: 'trueselfcounsellingservices@gmail.com',
-  phoneDisplay: '+91 8667344083',
-  phoneTel: '+918667344083',
-  whatsappHref: 'https://wa.me/918667344083',
-}
 
 const contactJsonLd = [
   {
@@ -86,49 +25,35 @@ const contactJsonLd = [
   },
 ]
 
-/** Hero background — warm, calm (Unsplash). Same family as Wellness page; swap URL to use your own asset. */
 const HERO_BG_IMAGE =
   'https://res.cloudinary.com/dagsqokgc/image/upload/q_auto/f_auto/v1778582785/33_result_y3au1p.webp'
 
+const INITIAL_FORM = {
+  name: '',
+  age: '',
+  location: '',
+  email: '',
+  phone: '',
+}
+
+const inputClass =
+  'w-full px-3.5 py-2.5 rounded-xl border border-[var(--color-stone)] bg-[#FFFFFF] text-sm text-[#4A4A4A] placeholder:text-[#b7aea3] outline-none transition-all duration-200 ease-out hover:border-[#e0d6c8] focus:border-[var(--color-sage-dark)] focus:ring-2 focus:ring-[var(--color-sage-dark)]/15'
+
+const labelClass = 'block text-xs font-medium tracking-wide text-[#6b6158] mb-1.5'
+
 export default function Contact() {
   const WEB3FORMS_ACCESS_KEY = 'c8aea697-74f4-4ec4-97fd-350e2fcf4704'
-  const [step, setStep] = useState(0)
-  const [formData, setFormData] = useState({})
+  const [formData, setFormData] = useState(INITIAL_FORM)
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
-  const current = STEPS[step]
-  const isLast = step === STEPS.length - 1
-  const isFirst = step === 0
-
-  const update = (value) => {
-    setFormData((prev) => ({ ...prev, [current.id]: value }))
+  const update = (field) => (e) => {
+    setFormData((prev) => ({ ...prev, [field]: e.target.value }))
   }
 
-  const value = formData[current?.id] ?? ''
-
-  const canNext = () => {
-    if (current.id === 'referral') return true
-    if (current.type === 'select') return String(value).trim().length > 0
-    if (current.type === 'text' || current.type === 'email' || current.type === 'tel') return value.trim().length > 0
-    return true
-  }
-
-  const handleNext = () => {
-    if (isLast) {
-      void submitForm()
-      return
-    }
-    setStep((s) => s + 1)
-  }
-
-  const handleBack = () => {
-    if (isFirst) return
-    setStep((s) => s - 1)
-  }
-
-  const submitForm = async () => {
+  const submitForm = async (e) => {
+    e.preventDefault()
     try {
       setIsSubmitting(true)
       setSubmitError('')
@@ -137,14 +62,12 @@ export default function Contact() {
         access_key: WEB3FORMS_ACCESS_KEY,
         subject: 'New Contact Form Submission - TRUESELF COUNSELLING',
         from_name: formData.name || 'Website Visitor',
-        name: formData.name || '',
-        age: formData.age || '',
-        phone: formData.phone || '',
-        location: formData.location || '',
-        profession: formData.profession || '',
-        concerns: formData.concerns || '',
-        referral: formData.referral || '',
-        languages: formData.languages || '',
+        name: formData.name.trim(),
+        age: formData.age.trim(),
+        location: formData.location.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        replyto: formData.email.trim(),
       }
 
       const res = await fetch('https://api.web3forms.com/submit', {
@@ -168,7 +91,7 @@ export default function Contact() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen">
+      <div className="min-h-screen bg-[#FFFFFF]">
         <SEO
           title="Thank You | TRUESELF COUNSELLING"
           description="Your message has been received. Our team will reach out within 1–2 business days to schedule your therapy session."
@@ -212,7 +135,7 @@ export default function Contact() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#FFFFFF]">
       {/* cspell:ignore logotop */}
       <Helmet>
         <title>Book a Therapy Session | Contact TRUESELF COUNSELLING</title>
@@ -227,9 +150,8 @@ export default function Contact() {
         path="/contact"
         jsonLd={contactJsonLd}
       />
-      {/* Hero */}
       <section
-        className="relative pt-24 sm:pt-28 pb-12 sm:pb-16 px-4 sm:px-6 text-center overflow-hidden"
+        className="relative pt-24 sm:pt-28 pb-8 sm:pb-10 px-4 sm:px-6 text-center overflow-hidden"
         style={{
           backgroundImage: `url('${HERO_BG_IMAGE}')`,
           backgroundSize: 'cover',
@@ -259,117 +181,119 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Multi-step form */}
-      <section className="py-8 sm:py-12 px-4 sm:px-6 bg-white">
-        <div className="max-w-xl mx-auto">
-          <div className="mb-4 sm:mb-6 flex gap-1.5 sm:gap-2">
-            {STEPS.map((_, i) => (
-              <div
-                key={i}
-                className={`h-1 flex-1 rounded-full transition-colors ${
-                  i <= step ? 'bg-[var(--color-sage-dark)]' : 'bg-[var(--color-stone)]'
-                }`}
-              />
-            ))}
-          </div>
+      <section className="py-8 sm:py-10 px-4 sm:px-6 bg-[#FFFFFF]">
+        <div className="max-w-lg mx-auto">
+          <motion.form
+            onSubmit={submitForm}
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="rounded-2xl bg-[#FFFFFF] border border-[var(--color-stone)] shadow-[0_6px_24px_rgba(92,74,50,0.06)] p-5 sm:p-6"
+          >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3.5">
+              <div>
+                <label htmlFor="contact-name" className={labelClass}>
+                  Name
+                </label>
+                <input
+                  id="contact-name"
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={update('name')}
+                  placeholder="Your full name"
+                  required
+                  autoComplete="name"
+                  className={inputClass}
+                />
+              </div>
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={step}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-              className="rounded-2xl sm:rounded-3xl bg-[var(--color-cream)] border border-[var(--color-stone)] p-4 sm:p-6 md:p-8"
-            >
-              <label className="block text-base sm:text-lg font-medium text-[#3d3d3d] mb-3 sm:mb-4">
-                {current.question}
-              </label>
+              <div>
+                <label htmlFor="contact-age" className={labelClass}>
+                  Age
+                </label>
+                <input
+                  id="contact-age"
+                  type="number"
+                  name="age"
+                  min="1"
+                  max="120"
+                  value={formData.age}
+                  onChange={update('age')}
+                  placeholder="e.g. 28"
+                  required
+                  className={inputClass}
+                />
+              </div>
 
-              {current.type === 'select' ? (
-                <div className="space-y-4">
-                  <select
-                    value={value}
-                    onChange={(e) => update(e.target.value)}
-                    aria-label={current.question}
-                    className="w-full px-4 py-3.5 sm:py-3 rounded-xl sm:rounded-2xl border-2 border-[var(--color-stone)] focus:border-[var(--color-sage-dark)] focus:ring-0 outline-none transition-colors text-base bg-white"
-                  >
-                    <option value="" disabled>
-                      {current.placeholder || 'Select an option'}
-                    </option>
-                    {current.options.map((opt) => (
-                      <option key={opt} value={opt}>
-                        {opt}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="flex gap-3">
-                    {!isFirst && (
-                      <Button variant="outline" onClick={handleBack} className="flex-1">
-                        Back
-                      </Button>
-                    )}
-                    <Button onClick={handleNext} className="flex-1" disabled={!canNext() || isSubmitting}>
-                      {isLast ? (isSubmitting ? 'Sending...' : 'Submit') : 'Next'}
-                    </Button>
-                  </div>
-                  {submitError && <p className="text-sm text-red-600">{submitError}</p>}
-                </div>
-              ) : current.options ? (
-                <div className="space-y-3">
-                  {current.options.map((opt) => (
-                    <button
-                      key={opt}
-                      type="button"
-                      onClick={() => {
-                        update(opt)
-                        if (!isLast) setTimeout(() => setStep((s) => s + 1), 200)
-                        else setSubmitted(true)
-                      }}
-                      className={`w-full text-left px-4 py-3.5 sm:py-3 rounded-xl sm:rounded-2xl border-2 transition-all text-sm sm:text-base ${
-                        value === opt
-                          ? 'border-[var(--color-sage-dark)] bg-[var(--color-mint)] text-[var(--color-sage-dark)]'
-                          : 'border-[var(--color-stone)] hover:border-[var(--color-sage)] bg-white'
-                      }`}
-                    >
-                      {opt}
-                    </button>
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-4">
-                  <input
-                    type={current.type || 'text'}
-                    value={value}
-                    onChange={(e) => update(e.target.value)}
-                    placeholder={current.placeholder}
-                    className="w-full px-4 py-3.5 sm:py-3 rounded-xl sm:rounded-2xl border-2 border-[var(--color-stone)] focus:border-[var(--color-sage-dark)] focus:ring-0 outline-none transition-colors text-base"
-                  />
-                  <div className="flex gap-3">
-                    {!isFirst && (
-                      <Button variant="outline" onClick={handleBack} className="flex-1">
-                        Back
-                      </Button>
-                    )}
-                    <Button onClick={handleNext} className="flex-1" disabled={!canNext() || isSubmitting}>
-                      {isLast ? (isSubmitting ? 'Sending...' : 'Submit') : 'Next'}
-                    </Button>
-                  </div>
-                  {submitError && <p className="text-sm text-red-600">{submitError}</p>}
-                </div>
+              <div>
+                <label htmlFor="contact-location" className={labelClass}>
+                  Location
+                </label>
+                <input
+                  id="contact-location"
+                  type="text"
+                  name="location"
+                  value={formData.location}
+                  onChange={update('location')}
+                  placeholder="City / State"
+                  required
+                  autoComplete="address-level2"
+                  className={inputClass}
+                />
+              </div>
+
+              <div>
+                <label htmlFor="contact-phone" className={labelClass}>
+                  Phone Number
+                </label>
+                <input
+                  id="contact-phone"
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={update('phone')}
+                  placeholder="e.g. +91 9876543210"
+                  required
+                  autoComplete="tel"
+                  className={inputClass}
+                />
+              </div>
+
+              <div className="sm:col-span-2">
+                <label htmlFor="contact-email" className={labelClass}>
+                  Email
+                </label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={update('email')}
+                  placeholder="you@example.com"
+                  required
+                  autoComplete="email"
+                  className={inputClass}
+                />
+              </div>
+
+              {submitError && (
+                <p className="sm:col-span-2 text-xs text-red-600">{submitError}</p>
               )}
 
-              {current.type !== 'select' && current.options && (
-                <div className="flex gap-3 mt-6">
-                  {!isFirst && (
-                    <Button variant="outline" onClick={handleBack}>
-                      Back
-                    </Button>
-                  )}
-                </div>
-              )}
-            </motion.div>
-          </AnimatePresence>
+              <div className="sm:col-span-2 pt-0.5">
+                <motion.button
+                  type="submit"
+                  disabled={isSubmitting}
+                  whileHover={isSubmitting ? undefined : { y: -1 }}
+                  whileTap={isSubmitting ? undefined : { y: 0 }}
+                  className="w-full rounded-xl bg-[var(--color-sage-dark)] text-white text-sm font-semibold px-5 py-2.5 shadow-sm transition-all duration-200 hover:bg-[#B8762F] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--color-gold-dark)] disabled:opacity-60 disabled:pointer-events-none"
+                >
+                  {isSubmitting ? 'Sending...' : 'Submit'}
+                </motion.button>
+              </div>
+            </div>
+          </motion.form>
         </div>
       </section>
     </div>

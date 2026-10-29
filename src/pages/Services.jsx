@@ -29,7 +29,7 @@ const servicesJsonLd = [
 
 export default function Services() {
   return (
-    <main className="min-h-screen bg-[var(--color-ivory)]">
+    <main className="min-h-screen bg-[#FFFFFF]">
       {/* cspell:ignore logotop */}
       <Helmet>
         <title>Therapy Services | Individual, Couples, Family & Online Counselling - TRUESELF COUNSELLING</title>
@@ -39,8 +39,8 @@ export default function Services() {
       </Helmet>
       <SEO
         title="Therapy Services | Individual, Couples, Family & Online Counselling - TRUESELF COUNSELLING"
-        description="Explore our online therapy services: individual therapy, couples counselling, family therapy, therapy for women, adolescent counselling and group workshops. Confidential, evidence-based and led by qualified women therapists."
-        keywords="therapy services, individual therapy, couples therapy, family therapy, therapy for women, adolescent therapy, online counselling India, group therapy workshops, mental health services"
+        description="Explore our online therapy services: individual therapy, couples counselling, family therapy, therapy for women and adolescent counselling. Confidential, evidence-based and led by qualified women therapists."
+        keywords="therapy services, individual therapy, couples therapy, family therapy, therapy for women, adolescent therapy, online counselling India, mental health services"
         path="/services"
         jsonLd={servicesJsonLd}
       />
@@ -55,7 +55,7 @@ export default function Services() {
         }}
       >
         {/* Elegant overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-[#f7f2e8]/85 to-[#EAD1A3]/90 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[#EAD1A3]/70 backdrop-blur-sm" />
 
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -109,7 +109,7 @@ export default function Services() {
                   className="block rounded-3xl overflow-hidden relative bg-white/60 backdrop-blur-lg border border-white/40 shadow-md hover:shadow-2xl transition-all duration-500"
                 >
                   {/* Gradient Border Effect */}
-                  <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-[#EAD1A3] via-white to-[#F0E6D0] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                  <div className="absolute inset-0 rounded-3xl p-[1px] bg-gradient-to-br from-[#EAD1A3] via-white to-white opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
                   <div className="relative bg-white rounded-2xl sm:rounded-3xl overflow-hidden">
 

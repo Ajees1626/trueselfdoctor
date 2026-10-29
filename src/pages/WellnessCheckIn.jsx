@@ -1,4 +1,4 @@
-// cspell:ignore Trueself trueself
+// cspell:ignore Trueself trueself personalised
 import { Helmet } from 'react-helmet'
 import { motion } from 'motion/react'
 import ContactWellnessPoll from '../components/ContactWellnessPoll'
@@ -82,7 +82,11 @@ export default function WellnessCheckIn() {
       </section>
 
       <section className="pt-8 sm:pt-10 md:pt-12 pb-16 sm:pb-20 px-4 sm:px-6 bg-[var(--color-sand)]">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-3xl mx-auto">
+          <p className="text-sm sm:text-base text-[#5a5a5a] text-center max-w-2xl mx-auto mb-8 sm:mb-10 px-2 text-pretty leading-relaxed">
+            Answer honestly — there are no right or wrong responses. When you finish, you will receive a personalised
+            reflection based on your answers, along with gentle guidance on what may feel helpful next.
+          </p>
           <ContactWellnessPoll hideIntro />
         </div>
       </section>
